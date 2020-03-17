@@ -1,0 +1,82 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="FadeFragmentTheme" parent="Theme.AppCompat.DialogWhenLarge">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="DialogTextViewStyle">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:fontFamily">@font/brandon_reg</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="android:fontFamily">@font/brandon_reg</item>
+        <item name="android:textColor">@color/navigation_bottom_color</item>
+    </style>
+
+    <style name="ExcursionInfoPrefixItemStyle">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:fontFamily">@font/brandon_reg</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ExcursionInfoItemStyle">
+        <item name="android:textColor">@color/cooks_club_red</item>
+        <item name="android:fontFamily">@font/brandon_reg</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!--Material Calendar Styles Start-->
+    <style name="CalendarHeaderTextStyle" parent="TextAppearance.MaterialCalendarWidget.Header">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:fontFamily">@font/brandon_light</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="CalendarWeekDayTextStyle" parent="TextAppearance.MaterialCalendarWidget.Header">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:fontFamily">@font/brandon_light</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="CalendarDateTextStyle" parent="TextAppearance.MaterialCalendarWidget.Date" >
+        <item name="android:textColor">@color/calendar_date_text_color</item>
+        <item name="android:fontFamily">@font/brandon_reg</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <!--Material Calendar Styles End-->
+
+    <style name="HyperTextViewStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/brandon_reg</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="HyperTextDescription">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/brandon_light</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="MenuButtonStyle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/brandon_reg</item>
+        <item name="android:background">@drawable/stroke_black_05</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+</resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_nav_graph"
+    app:startDestination="@id/splashScreenFragment">
+
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.zeustech.excursions.ui.splashScreen.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreen_to_login"
+            app:popUpTo="@id/splashScreenFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashScreen_to_main"
+            app:popUpTo="@id/splashScreenFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/mainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.zeustech.excursions.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_to_main"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/mainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.zeustech.excursions.ui.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_main_to_splashScreen"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/splashScreenFragment" />
+    </fragment>
+</navigation>

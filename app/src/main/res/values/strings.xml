@@ -1,0 +1,137 @@
+<resources>
+    <string name="app_name">Excursions</string>
+    <string name="excursion_image_description">Excursion Image</string>
+    <string name="learn_more">Learn More</string>
+    <string name="back_arrow_description">Back arrow icon</string>
+    <string name="basket_icon_description">Basket Icon</string>
+    <string name="gallery">Gallery</string>
+    <string name="book_now">Book now</string>
+    <string name="alert_icon_description">alert icon</string>
+    <string name="delete_icon_description">Delete icon</string>
+    <string name="date">Date: \u0020</string>
+    <string name="pickup_point">Pickup point: \u0020</string>
+    <string name="pickup_time">Pickup time: \u0020</string>
+    <string name="adults">Adults: \u0020</string>
+    <string name="children">Children: \u0020</string>
+    <string name="infants">Infants: \u0020</string>
+    <string name="language"> Language:\u0020</string>
+    <string name="excursion_price">Price: \u0020</string>
+    <string name="money_format">%1$s €</string>
+    <string name="book_all_now">Book all now</string>
+    <string name="empty_basket">The basket is empty</string>
+    <string name="your_next_adventure">Your Next Adventure</string>
+    <string name="liveData">Excursions</string>
+    <string name="basket">Basket</string>
+    <string name="tickets">Tickets</string>
+    <string name="my_shopping_cart">My Shopping Cart</string>
+    <string name="my_tickets">My Tickets</string>
+    <string name="canceled">Canceled</string>
+    <string name="click_for_details">Click for details</string>
+    <string name="pickUpPoint">Pickup point: %1$s</string>
+    <string name="pickUpTime">Pickup time: %1$s</string>
+    <string name="excursion_voucher">Excursion Voucher</string>
+    <string name="ticket">Ticket:</string>
+    <string name="customer">Customer:</string>
+    <string name="hotel_">Hotel:</string>
+    <string name="room_no">Room No:</string>
+    <string name="transactionDate">Transaction Date:</string>
+    <string name="barcode_image">Barcode Image</string>
+    <string name="company_details">%1$s \n%2$s %3$s\nVRN: %4$s\nDOY: %5$s\nGNTO: %6$s\nTEL: %7$s\n\n %8$s\n\nCopy of the original ticket</string>
+    <string name="excursion_booking">Excursion Booking</string>
+    <string name="booking_details">Booking Details</string>
+    <string name="selected_date">You have selected \u0020</string>
+    <string name="booking_adults">Adults</string>
+    <string name="valid_adults_age">from 13 years old</string>
+    <string name="booking_children">Children</string>
+    <string name="valid_children_age">from 2 to 13 years old</string>
+    <string name="booking_infants">Infants</string>
+    <string name="valid_infants">from 0 to 2 years old</string>
+    <string name="excursion_language">Language of excursion</string>
+    <string name="num_0">0</string>
+    <string name="num_1">1</string>
+    <string name="num_2">2</string>
+    <string name="num_3">3</string>
+    <string name="num_4">4</string>
+    <string name="num_5">5</string>
+    <string name="english">English</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="added_to_cart">Added to cart</string>
+    <string name="select_date">Please select one of the given dates</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="room_number">Room number</string>
+    <string name="remarks">Remarks</string>
+    <string name="card_holder_name">Cardholder\'s name</string>
+    <string name="card_number">Card number</string>
+    <string name="exp_month">Exp. Month</string>
+    <string name="exp_year">Exp. Year</string>
+    <string name="cvv">Cvv</string>
+    <string name="enter_email">Please enter your email:</string>
+    <string name="invoices">Your invoices will be sent to the provided email.</string>
+    <string name="every_pay_logo_description">Every Pay Logo</string>
+    <string name="every_pay_headline">"Payment Methods / Secure Transactions:</string>
+    <string name="every_pay_text">Recognizing the importance of electronic payment security, EveryPay is a licensed Payment Institution by the Bank of Greece (Decision No. 280/3 / 23&#8211;7&#8211;2018 GG B 3010 / 25&#8211;7&#8211;2018), and manages securely card payment transactions, in accordance with the regulatory framework of the card transaction security management standard. Everypay is certified in accordance with the PCI DSS compliance standards, and is subject to periodic audits by a qualified consulting firm. All Everypay services are made through secure connections with 256bit SSL certificates.</string>
+    <string name="total_payment">Total payment \u0020</string>
+    <string name="pay">Pay %1$s €</string>
+    <string name="please_wait">Please wait</string>
+    <string name="processing">Processing…</string>
+    <string name="ic_check_description">Success icon</string>
+    <string name="thank_you">Thank you.</string>
+    <string name="find_your_ticket">You can find your ticket on the ticket page and in your email inbox.</string>
+    <string name="have_fun">Have fun!</string>
+    <string name="customer_details">Customer Details</string>
+    <string name="payment">Payment</string>
+
+    <string name="included">Included:</string>
+    <string name="next">Next</string>
+    <string name="try_again">Try Again</string>
+    <string name="slow_internet_connection">Slow or no internet connection.</string>
+    <string name="check_settings">Please check your internet settings</string>
+    <string name="zeus_hotels">Zeus Hotels</string>
+    <string name="login">Login</string>
+    <string name="area">Area</string>
+    <string name="hotel">Hotel</string>
+    <string name="zeus_tech">Zeus Tech</string>
+    <string name="logout">Logout</string>
+    <string name="search">Search</string>
+    <string name="logout_warning">Are you sure you want to log out?</string>
+    <string name="cancel">Cancel</string>
+    <string name="log_out">Log Out</string>
+    <string name="print_ticket">Print Ticket</string>
+    <string name="image_not_available">Image not available</string>
+    <string name="no_excursions_found">No excursions found</string>
+    <string name="clear">Clear</string>
+    <string name="type_an_excursion_name">Excursion search</string>
+
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
+
+    <string-array name="months">
+        <item>@string/january</item>
+        <item>@string/february</item>
+        <item>@string/march</item>
+        <item>@string/april</item>
+        <item>@string/may</item>
+        <item>@string/june</item>
+        <item>@string/july</item>
+        <item>@string/august</item>
+        <item>@string/september</item>
+        <item>@string/october</item>
+        <item>@string/november</item>
+        <item>@string/december</item>
+    </string-array>
+
+    <string name="move_back">Move back</string>
+    <string name="move_forward">Move forward</string>
+
+</resources>

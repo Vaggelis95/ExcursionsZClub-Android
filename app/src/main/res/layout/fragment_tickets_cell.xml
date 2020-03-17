@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:background="@drawable/recycler_cell_white_back">
+
+    <TextView
+        android:id="@+id/excDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/brandon_reg"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp">
+
+        <ImageView
+            android:id="@+id/image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/container"
+            android:layout_marginEnd="15dp"
+            android:scaleType="centerCrop"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/excursion_image_description" />
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/excDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/brandon_reg"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/pickUpPoint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/brandon_reg"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/pickUpTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/brandon_reg"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/brandon_reg"
+                android:textSize="18sp"
+                android:text="@string/canceled"
+                android:textColor="@color/cooks_club_red"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/brandon_light"
+        android:textColor="@color/dark_gray"
+        android:textSize="15sp"
+        android:text="@string/click_for_details"/>
+
+</LinearLayout>

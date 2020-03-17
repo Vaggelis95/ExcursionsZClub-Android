@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none"
+    android:background="@android:color/white"
+    tools:context=".ui.booking.customer.CustomerDetailsFragment">
+
+    <LinearLayout
+        android:id="@+id/parent_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:paddingBottom="25dp"
+        android:focusableInTouchMode="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/brandon_reg"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:text="@string/first_name"/>
+
+        <com.zeustech.excursions.customViews.HybridEditText
+            android:id="@+id/first_name"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:fontFamily="@font/brandon_reg"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/brandon_reg"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:text="@string/last_name"/>
+
+        <com.zeustech.excursions.customViews.HybridEditText
+            android:id="@+id/last_name"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:fontFamily="@font/brandon_reg"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/brandon_reg"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:text="@string/room_number"/>
+
+        <com.zeustech.excursions.customViews.HybridEditText
+            android:id="@+id/room_number"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:fontFamily="@font/brandon_reg"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/brandon_reg"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:text="@string/remarks"/>
+
+        <com.zeustech.excursions.customViews.HybridEditText
+            android:id="@+id/remarks"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:fontFamily="@font/brandon_reg"/>
+
+        <com.zeustech.excursions.customViews.EventButton
+            android:id="@+id/next_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="25dp"
+            android:text="@string/next" />
+
+    </LinearLayout>
+
+</ScrollView>

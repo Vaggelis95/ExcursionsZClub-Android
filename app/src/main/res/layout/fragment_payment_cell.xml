@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp">
+
+    <TextView
+        android:id="@+id/exc_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:fontFamily="@font/brandon_reg"
+        android:textSize="19sp"/>
+
+    <TextView
+        android:id="@+id/pick_up_point"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:fontFamily="@font/brandon_reg"
+        android:textSize="16.5sp"/>
+
+    <TextView
+        android:id="@+id/pick_up_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:fontFamily="@font/brandon_reg"
+        android:textSize="16.5sp"/>
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:fontFamily="@font/brandon_reg"
+        android:textSize="16.5sp"
+        android:layout_marginTop="2dp"/>
+
+</LinearLayout>

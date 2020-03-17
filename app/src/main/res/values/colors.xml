@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#01A2E2</color>
+    <color name="colorPrimaryDark">#02335C</color>
+    <color name="colorAccent">#01A2E2</color>
+
+    <color name="cooks_club_blue">#01A2E2</color>
+    <color name="cooks_club_red">#cc5635</color>
+    <color name="gray">#808080</color>
+    <color name="dark_gray">#595959</color>
+    <color name="light_gray">#B3B3B3</color>
+
+    <color name="black">#000</color>
+    <color name="red">#ff0000</color>
+</resources>
