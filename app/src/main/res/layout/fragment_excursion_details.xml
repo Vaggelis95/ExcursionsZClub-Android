@@ -19,50 +19,53 @@
 
         <ImageView
             android:id="@+id/back_arrow"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/header_item_size"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="@+id/exc_name"
             app:layout_constraintBottom_toBottomOf="@+id/exc_name"
-            android:layout_width="25dp"
-            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
             android:src="@drawable/back_arrow_ic"
             android:contentDescription="@string/back_arrow_description"/>
 
         <TextView
             android:id="@+id/exc_name"
-            app:layout_constraintStart_toEndOf="@id/back_arrow"
-            app:layout_constraintEnd_toStartOf="@id/basket_counter"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="25dp"
+            app:layout_constraintStart_toEndOf="@id/back_arrow"
+            app:layout_constraintEnd_toStartOf="@id/basket_counter"
+            android:layout_marginStart="@dimen/header_item_size"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/brandon_med"
             android:gravity="center_horizontal"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
-            android:textSize="18sp"/>
+            android:textSize="@dimen/text_size_18"/>
 
         <TextView
             android:id="@+id/basket_counter"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/header_item_size"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="@id/basket_logo"
             app:layout_constraintBottom_toBottomOf="@id/basket_logo"
             app:layout_constraintEnd_toStartOf="@id/basket_logo"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_size_12"
             android:gravity="center"
             android:textColor="@android:color/white"
             android:fontFamily="@font/brandon_reg"
-            android:background="@drawable/circle_red"
+            android:background="@drawable/basket_bubble_shape"
             android:visibility="invisible"/>
 
         <ImageView
             android:id="@+id/basket_logo"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/header_item_size"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="@id/back_arrow"
             app:layout_constraintBottom_toBottomOf="@id/back_arrow"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
             android:src="@drawable/basket_icon"
             android:tint="@color/gray"
             android:visibility="invisible"
@@ -118,12 +121,12 @@
                 android:id="@+id/exc_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="25dp"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:textColor="@android:color/black"
                 android:fontFamily="@font/brandon_light"
-                android:textSize="16sp"/>
+                android:textSize="@dimen/text_size_16"/>
 
             <View
                 android:id="@+id/separator_line"
@@ -140,7 +143,7 @@
                 android:text="@string/gallery"
                 android:fontFamily="@font/brandon_reg"
                 android:textColor="@android:color/black"
-                android:textSize="19sp"/>
+                android:textSize="@dimen/text_size_19"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
@@ -152,10 +155,11 @@
             <com.zeustech.excursions.customViews.EventButton
                 android:id="@+id/book_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/button_height"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
+                android:textSize="@dimen/text_size_18"
                 android:text="@string/book_now"/>
 
         </LinearLayout>

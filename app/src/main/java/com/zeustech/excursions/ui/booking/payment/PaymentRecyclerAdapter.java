@@ -46,17 +46,17 @@ public class PaymentRecyclerAdapter extends RecyclerView.Adapter<PaymentRecycler
         viewHolder.pick_up_point.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.pickup_point),
                 model.getPickUpPoint(),
-                ContextCompat.getColor(context, R.color.cooks_club_red)));
+                ContextCompat.getColor(context, R.color.soft_red)));
 
         viewHolder.pick_up_time.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.pickup_time),
                 model.getPickUpTime(),
-                ContextCompat.getColor(context, R.color.cooks_club_red)));
+                ContextCompat.getColor(context, R.color.soft_red)));
 
         viewHolder.price.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.excursion_price),
                 String.format(context.getResources().getString(R.string.money_format), model.getFormattedPrice()),
-                ContextCompat.getColor(context, R.color.cooks_club_red)));
+                ContextCompat.getColor(context, R.color.soft_red)));
     }
 
     @Override

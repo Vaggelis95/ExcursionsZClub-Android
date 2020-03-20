@@ -24,13 +24,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/button_height"
         android:layout_marginBottom="10dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:background="@android:color/black"
         android:fontFamily="@font/brandon_reg"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_size_16"
         android:textColor="@android:color/white"
         android:text="@string/book_all_now" />
 

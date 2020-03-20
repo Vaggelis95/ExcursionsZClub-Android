@@ -33,7 +33,6 @@ import com.zeustech.excursions.viewModels.GlobalVM;
 
 public class MainFragment extends Fragment implements OnBasketClickListener {
 
-    //private ExcursionsViewModel excursionsVM;
     private GlobalVM globalVM;
 
     private ViewPager view_pager;
@@ -55,7 +54,6 @@ public class MainFragment extends Fragment implements OnBasketClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         globalVM = new ViewModelProvider(getActivity() != null ? getActivity() : this).get(GlobalVM.class);
-        //excursionsVM = new ViewModelProvider(getActivity() != null ? getActivity() : this).get(ExcursionsViewModel.class);
     }
 
     @Override
@@ -74,7 +72,8 @@ public class MainFragment extends Fragment implements OnBasketClickListener {
         logoutImg = view.findViewById(R.id.logout_img);
         searchBtn = view.findViewById(R.id.search_btn);
         navigation_bar = view.findViewById(R.id.navigation_bar);
-        logoutDialog = new Dialog(view.getContext());
+
+        logoutDialog = new Dialog(view.getContext(), R.style.PopUpDialogTheme);
         logoutDialog.setContentView(R.layout.dialog_logout);
         logoutBtn = logoutDialog.findViewById(R.id.logout_btn);
         Button cancelBtn = logoutDialog.findViewById(R.id.cancel_btn);
@@ -174,7 +173,7 @@ public class MainFragment extends Fragment implements OnBasketClickListener {
         }
     }
 
-    private class ExPagerAdapter extends FragmentStatePagerAdapter {
+    private static class ExPagerAdapter extends FragmentStatePagerAdapter {
 
         ExPagerAdapter(@NonNull FragmentManager fm) {
             super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

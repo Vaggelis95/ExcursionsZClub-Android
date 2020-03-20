@@ -47,7 +47,7 @@ public class SplashScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        connectionDialog = new Dialog(view.getContext());
+        connectionDialog = new Dialog(view.getContext(), R.style.PopUpDialogTheme);
         setUpDialog();
         loggedIn = (globalVM.getSelectedHotel() != null);
         if (loggedIn) { // Already Logged in

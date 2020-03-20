@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +19,9 @@ import com.zeustech.excursions.bixolon.manager.BixolonManager;
 import com.zeustech.excursions.callbacks.CompletionHandler;
 import com.zeustech.excursions.customViews.BarcodeGenerator;
 import com.zeustech.excursions.models.ExTicketModel;
+import com.zeustech.excursions.tools.ScreenDialogFragment;
 
-public class TicketDetails extends DialogFragment {
+public class TicketDetails extends ScreenDialogFragment {
 
     private enum State {
         LOADING,
@@ -55,10 +55,10 @@ public class TicketDetails extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.FadeFragmentTheme);
         if (getArguments() != null) {
             model = getArguments().getParcelable(TICKET_INSTRUCTIONS);
         }
+        setFullScreen(true);
     }
 
     @Override
@@ -92,11 +92,11 @@ public class TicketDetails extends DialogFragment {
     }
 
     private void setUpDialogs(@NonNull View view) {
-        loadingDialog = new Dialog(view.getContext());
+        loadingDialog = new Dialog(view.getContext(), R.style.PopUpDialogTheme);
         loadingDialog.setContentView(R.layout.dialog_loading);
         loadingDialog.setCancelable(false);
 
-        errorDialog = new Dialog(view.getContext());
+        errorDialog = new Dialog(view.getContext(), R.style.PopUpDialogTheme);
         errorDialog.setContentView(R.layout.dialog_error);
     }
 

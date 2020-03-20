@@ -3,14 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="30dp"
+    android:padding="@dimen/padding_30"
     android:orientation="vertical"
     android:background="@android:color/white">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="@dimen/text_size_18"
         android:fontFamily="@font/brandon_reg"
         android:textColor="@color/dark_gray"
         android:text="@string/slow_internet_connection"/>
@@ -18,8 +18,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:textSize="18sp"
+        android:layout_marginBottom="@dimen/padding_25"
+        android:textSize="@dimen/text_size_18"
         android:textColor="@color/dark_gray"
         android:fontFamily="@font/brandon_reg"
         android:text="@string/check_settings"/>
@@ -27,10 +27,11 @@
     <Button
         android:id="@+id/btn"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/button_height"
         android:fontFamily="@font/brandon_reg"
         android:text="@string/try_again"
-        android:textSize="18sp"
+        android:textAllCaps="true"
+        android:textSize="@dimen/text_size_18"
         android:textColor="@android:color/white"
         android:background="@color/colorPrimaryDark"/>
 

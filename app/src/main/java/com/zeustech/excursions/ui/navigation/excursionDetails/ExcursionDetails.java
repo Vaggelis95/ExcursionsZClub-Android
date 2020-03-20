@@ -1,11 +1,9 @@
 package com.zeustech.excursions.ui.navigation.excursionDetails;
 
-import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,12 +13,12 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zeustech.excursions.R;
+import com.zeustech.excursions.tools.ScreenDialogFragment;
 import com.zeustech.excursions.ui.booking.BookingFragment;
 import com.zeustech.excursions.customViews.OnBasketClickListener;
 import com.zeustech.excursions.customViews.EventButton;
@@ -31,7 +29,7 @@ import com.zeustech.excursions.viewModels.GlobalVM;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ExcursionDetails extends DialogFragment {
+public class ExcursionDetails extends ScreenDialogFragment {
 
     private static final String EXC = "exc";
     private static final String EXC_NAME = "exc_name";
@@ -45,7 +43,6 @@ public class ExcursionDetails extends DialogFragment {
     private TextView exc_name_tv, exc_description, basket_counter;
     private RecyclerView recycler_view;
     private DetailsRecyclerAdapter adapter;
-    private Dialog imageDialog;
     private EventButton book_button;
     private View separator_line;
     private TextView gallery_header;
@@ -89,12 +86,12 @@ public class ExcursionDetails extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.FadeFragmentTheme);
         if (getArguments() != null) {
             exc_name = getArguments().getString(EXC_NAME);
             exc = getArguments().getParcelable(EXC);
         }
         globalVM = new ViewModelProvider(getActivity() != null ? getActivity() : this).get(GlobalVM.class);
+        setFullScreen(true);
     }
 
     @Override
@@ -124,7 +121,7 @@ public class ExcursionDetails extends DialogFragment {
 
         recycler_view.setLayoutManager(new LinearLayoutManager(recycler_view.getContext(), LinearLayoutManager.HORIZONTAL, false));
         try {
-            setUpView(view);
+            setUpView();
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -151,9 +148,10 @@ public class ExcursionDetails extends DialogFragment {
 
         adapter.setOnImageClickListener((position, pickPath) -> {
             recycler_view.smoothScrollToPosition(position);
-            ImageView imageView = imageDialog.findViewById(R.id.image);
-            Glide.with(imageView.getContext()).load(pickPath).into(imageView);
-            imageDialog.show();
+            ImageDisplayFragment.newInstance(pickPath).show(
+                    getChildFragmentManager(),
+                    ImageDisplayFragment.class.getSimpleName()
+            );
         });
 
         book_button.setOnClickListener(v -> {
@@ -169,19 +167,12 @@ public class ExcursionDetails extends DialogFragment {
         BookingFragment.newInstance(0).show(getChildFragmentManager(), BookingFragment.class.getSimpleName());
     }
 
-    private void setUpView(@NonNull View view) throws NullPointerException {
+    private void setUpView() throws NullPointerException {
         book_button.applyStyle(book_button.getContext(), EventButton.Style.BLACK);
         Glide.with(main_pick.getContext()).load(exc.getMainPicPath()).into(main_pick);
         exc_name_tv.setText(exc_name);
         exc_description.setText(exc.getDescription());
         separator_line.setVisibility((exc.getPicGallery() != null) ? View.VISIBLE : View.GONE);
         gallery_header.setVisibility((exc.getPicGallery() != null) ? View.VISIBLE : View.GONE);
-        imageDialog = new Dialog(view.getContext());
-        Window dialogWindow = imageDialog.getWindow();
-        if (dialogWindow != null) {
-            dialogWindow.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            dialogWindow.setBackgroundDrawableResource(android.R.color.transparent);
-        }
-        imageDialog.setContentView(R.layout.dialog_excursion_image);
     }
 }

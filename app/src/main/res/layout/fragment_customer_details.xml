@@ -26,15 +26,15 @@
             android:layout_marginTop="15dp"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_16"
             android:text="@string/first_name"/>
 
         <com.zeustech.excursions.customViews.HybridEditText
             android:id="@+id/first_name"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/text_field_height"
             android:padding="10dp"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_18"
             android:fontFamily="@font/brandon_reg"/>
 
         <TextView
@@ -43,15 +43,15 @@
             android:layout_marginTop="15dp"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_16"
             android:text="@string/last_name"/>
 
         <com.zeustech.excursions.customViews.HybridEditText
             android:id="@+id/last_name"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/text_field_height"
             android:padding="10dp"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_18"
             android:fontFamily="@font/brandon_reg"/>
 
         <TextView
@@ -60,15 +60,15 @@
             android:layout_marginTop="15dp"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_16"
             android:text="@string/room_number"/>
 
         <com.zeustech.excursions.customViews.HybridEditText
             android:id="@+id/room_number"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/text_field_height"
             android:padding="10dp"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_18"
             android:fontFamily="@font/brandon_reg"/>
 
         <TextView
@@ -77,23 +77,24 @@
             android:layout_marginTop="15dp"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_16"
             android:text="@string/remarks"/>
 
         <com.zeustech.excursions.customViews.HybridEditText
             android:id="@+id/remarks"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/text_field_height"
             android:padding="10dp"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_18"
             android:fontFamily="@font/brandon_reg"/>
 
         <com.zeustech.excursions.customViews.EventButton
             android:id="@+id/next_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_height"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="25dp"
+            android:textSize="@dimen/text_size_18"
             android:text="@string/next" />
 
     </LinearLayout>

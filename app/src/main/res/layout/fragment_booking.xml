@@ -19,11 +19,12 @@
 
         <ImageView
             android:id="@+id/back_arrow"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/header_item_size"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_width="25dp"
-            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
             android:src="@drawable/back_arrow_ic"
             android:contentDescription="@string/back_arrow_description"/>
 
@@ -32,14 +33,14 @@
             app:layout_constraintStart_toEndOf="@id/back_arrow"
             app:layout_constraintEnd_toStartOf="@id/basket_counter"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="@dimen/header_item_size"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/brandon_bld"
             android:gravity="center_horizontal"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_18"
             android:text="@string/excursion_booking"/>
 
         <TextView
@@ -55,30 +56,32 @@
             android:gravity="center_horizontal"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
-            android:textSize="16.5sp"
+            android:textSize="@dimen/text_size_16_5"
             android:text="@string/booking_details"/>
 
         <TextView
             android:id="@+id/basket_counter"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/header_item_size"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/basket_logo"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_size_12"
             android:gravity="center"
             android:textColor="@android:color/white"
             android:fontFamily="@font/brandon_reg"
-            android:background="@drawable/circle_red"
+            android:background="@drawable/basket_bubble_shape"
             android:visibility="invisible"/>
 
         <ImageView
             android:id="@+id/basket_logo"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/header_item_size"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
             android:src="@drawable/basket_icon"
             android:tint="@color/gray"
             android:visibility="invisible"
@@ -88,11 +91,13 @@
 
     <com.zeustech.excursions.customViews.CustomViewPager
         android:id="@+id/view_pager"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="0dp"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

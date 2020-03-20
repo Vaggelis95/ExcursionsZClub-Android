@@ -4,55 +4,57 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zeustech.excursions.R;
 import com.zeustech.excursions.models.ExcursionsModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ExcursionRecyclerAdapter extends RecyclerView.Adapter<ExcursionRecyclerAdapter.ExcursionViewHolder> {
-
-    private List<ExcursionsModel> dataSet;
-    private OnExcursionClickListener listener;
-    private boolean isUserInteractionEnabled;
+public class ExcursionRecyclerAdapter extends ListAdapter<ExcursionsModel, ExcursionRecyclerAdapter.ViewHolder> {
 
     interface OnExcursionClickListener {
         void onExcursionClicked(String exc_code, String exc_name);
     }
 
+    private final static DiffUtil.ItemCallback<ExcursionsModel> callback = new DiffUtil.ItemCallback<ExcursionsModel>() {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull ExcursionsModel model, @NonNull ExcursionsModel t1) {
+            return model.areItemsTheSame(t1);
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull ExcursionsModel model, @NonNull ExcursionsModel t1) {
+            return model.areContentsTheSame(t1);
+        }
+
+    };
+
+    private OnExcursionClickListener listener;
+    private boolean isUserInteractionEnabled;
+
     ExcursionRecyclerAdapter() {
-        this.dataSet = new ArrayList<>();
+        super(callback);
         isUserInteractionEnabled = true;
     }
 
     @NonNull
     @Override
-    public ExcursionViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_excursions_cell, viewGroup, false);
-        return new ExcursionViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ExcursionViewHolder viewHolder, int position) {
-        ExcursionsModel excursion = dataSet.get(position);
-        if (excursion != null) viewHolder.bind(excursion);
-    }
-
-    @Override
-    public int getItemCount() {
-        return (dataSet != null) ? dataSet.size() : 0;
-    }
-
-    void setDataSet(List<ExcursionsModel> dataSet) {
-        this.dataSet = dataSet;
-        notifyDataSetChanged();
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        ExcursionsModel excursion = getItem(position);
+        if (excursion != null) holder.bind(excursion);
     }
 
     void setOnExcursionClickListener(OnExcursionClickListener listener) {
@@ -63,27 +65,27 @@ public class ExcursionRecyclerAdapter extends RecyclerView.Adapter<ExcursionRecy
         isUserInteractionEnabled = enabled;
     }
 
-    class ExcursionViewHolder extends RecyclerView.ViewHolder {
-
-        private ConstraintLayout noImageContainer, cardView;
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView image, noImage;
-        private TextView headline;
+        private TextView headline, noImageDescription;
+        private ProgressBar progressBar;
 
-        ExcursionViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
-            noImageContainer = itemView.findViewById(R.id.no_image_container);
-            noImage = itemView.findViewById(R.id.no_image);
-
-            cardView = itemView.findViewById(R.id.card_view);
             image = itemView.findViewById(R.id.image);
+            noImage = itemView.findViewById(R.id.no_image);
             headline = itemView.findViewById(R.id.headline);
+            progressBar = itemView.findViewById(R.id.progress_bar);
+            noImageDescription = itemView.findViewById(R.id.no_image_description);
 
             itemView.setOnClickListener(v -> {
                 if (isUserInteractionEnabled) {
                     if (listener == null) return;
-                    listener.onExcursionClicked(dataSet.get(getAdapterPosition()).getCode(),
-                            dataSet.get(getAdapterPosition()).getDescription());
+                    ExcursionsModel excursion = getItem(getAdapterPosition());
+                    if (excursion != null) {
+                        listener.onExcursionClicked(excursion.getCode(), excursion.getDescription());
+                    }
                 }
             });
         }
@@ -91,13 +93,24 @@ public class ExcursionRecyclerAdapter extends RecyclerView.Adapter<ExcursionRecy
         private void bind(@NonNull ExcursionsModel excursion) {
             boolean imageAvailable = excursion.isImageAvailable();
             headline.setText(excursion.getDescription());
-            cardView.setVisibility(imageAvailable ? View.VISIBLE : View.INVISIBLE);
-            noImageContainer.setVisibility(imageAvailable ? View.INVISIBLE : View.VISIBLE);
+            progressBar.setVisibility(imageAvailable ? View.VISIBLE : View.INVISIBLE);
+            noImage.setVisibility(imageAvailable ? View.INVISIBLE : View.VISIBLE);
+            noImageDescription.setVisibility(imageAvailable ? View.INVISIBLE : View.VISIBLE);
+            image.setVisibility(imageAvailable ? View.VISIBLE : View.INVISIBLE);
+
             if (imageAvailable) {
-                Glide.with(image.getContext()).load(excursion.getPicPath()).into(image);
+                Glide.with(noImage.getContext()).clear(noImage);
+                Glide.with(image.getContext())
+                        .load(excursion.getPicPath())
+                        .centerCrop()
+                        .into(image);
             } else {
-                Glide.with(image.getContext()).load(R.drawable.image_not_available).into(noImage);
+                Glide.with(image.getContext()).clear(image);
+                Glide.with(noImage.getContext())
+                        .load(R.drawable.image_not_available)
+                        .into(noImage);
             }
+
         }
 
     }

@@ -30,7 +30,6 @@ public class EventButton extends androidx.appcompat.widget.AppCompatButton {
     }
 
     private void initView(Context context) {
-        setTextSize(18);
         drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
         setBackground(drawable);
@@ -54,7 +53,7 @@ public class EventButton extends androidx.appcompat.widget.AppCompatButton {
                 break;
             }
             case RED: {
-                int color = ContextCompat.getColor(context, R.color.cooks_club_red);
+                int color = ContextCompat.getColor(context, R.color.soft_red);
                 drawable.setColor(color);
                 drawable.setStroke(2, color);
                 setTextColor(Color.WHITE);

@@ -29,24 +29,21 @@
             <com.zeustech.excursions.customViews.autoComplete.AutoCompleteSearchView
                 android:id="@+id/search_field"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/search_widget_height"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-
-                android:paddingStart="10dp"
-                android:paddingEnd="30dp"
-
+                android:paddingStart="@dimen/search_widget_padding_start"
+                android:paddingEnd="@dimen/search_widget_padding_end"
                 android:hint="@string/type_an_excursion_name"
                 android:textColorHint="@color/gray"
                 android:dropDownAnchor="@id/search_container"
-
                 android:inputType="textCapSentences"
                 android:imeOptions="actionDone"
                 android:singleLine="true"
                 android:completionThreshold="1"
-                android:textSize="17sp"
+                android:textSize="@dimen/text_size_17"
                 android:overlapAnchor="false"
                 android:fontFamily="@font/brandon_reg"
                 tools:ignore="LabelFor"
@@ -54,9 +51,10 @@
 
             <ImageView
                 android:id="@+id/clear_search_btn"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="10dp"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/search_widget_clear_height"
+                android:layout_marginEnd="@dimen/search_widget_clear_margin_end"
+                app:layout_constraintDimensionRatio="1:1"
                 android:visibility="invisible"
                 app:layout_constraintTop_toTopOf="@+id/search_field"
                 app:layout_constraintBottom_toBottomOf="@id/search_field"

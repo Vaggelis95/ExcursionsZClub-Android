@@ -7,8 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
@@ -25,6 +25,7 @@ import com.zeustech.excursions.customViews.autoComplete.AutoCompleteListener;
 import com.zeustech.excursions.customViews.autoComplete.AutoCompleteSearchView;
 import com.zeustech.excursions.models.ExcursionModel;
 import com.zeustech.excursions.models.ExcursionsModel;
+import com.zeustech.excursions.tools.ScreenManager;
 import com.zeustech.excursions.ui.navigation.excursionDetails.ExcursionDetails;
 import com.zeustech.excursions.viewModels.GlobalVM;
 
@@ -53,7 +54,6 @@ public class ExcursionsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         globalVM = new ViewModelProvider(getActivity() != null ? getActivity() : this).get(GlobalVM.class);
-        //excursionsVM = new ViewModelProvider(getActivity() != null ? getActivity() : this).get(ExcursionsViewModel.class);
     }
 
     @Override
@@ -76,11 +76,9 @@ public class ExcursionsFragment extends Fragment {
         adapter = new ExcursionRecyclerAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(ScreenManager.isPhone(view.getContext()) ? 1 : 2, StaggeredGridLayoutManager.VERTICAL));
         searchAdapter = new SearchAdapter(view.getContext());
         searchField.setAdapter(searchAdapter);
-
         setUpListeners();
     }
 
@@ -95,7 +93,7 @@ public class ExcursionsFragment extends Fragment {
             swipe_layout.setRefreshing(false);
         }
         noExField.setVisibility(dataSet.size() > 0 ? View.GONE : View.VISIBLE);
-        adapter.setDataSet(dataSet);
+        adapter.submitList(dataSet);
         if (updateSearchBar) searchAdapter.setDataSet(dataSet);
     }
 

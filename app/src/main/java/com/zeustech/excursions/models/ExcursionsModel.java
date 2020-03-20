@@ -7,6 +7,8 @@ import com.zeustech.excursions.customViews.autoComplete.AutoCompleteData;
 
 import androidx.annotation.NonNull;
 
+import java.util.Objects;
+
 public class ExcursionsModel implements AutoCompleteData, Parcelable {
 
     private String excCode, excDescr, picPath;
@@ -15,6 +17,30 @@ public class ExcursionsModel implements AutoCompleteData, Parcelable {
         this.excCode = excCode;
         this.excDescr = excDescr;
         this.picPath = picPath;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExcursionsModel that = (ExcursionsModel) o;
+        return Objects.equals(excCode, that.excCode) &&
+                Objects.equals(excDescr, that.excDescr) &&
+                Objects.equals(picPath, that.picPath);
+    }
+
+    public boolean areItemsTheSame(@NonNull ExcursionsModel that) {
+        return Objects.equals(excCode, that.excCode);
+    }
+
+    public boolean areContentsTheSame(@NonNull ExcursionsModel that) {
+        return Objects.equals(excDescr, that.excDescr) &&
+                Objects.equals(picPath, that.picPath);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(excCode, excDescr, picPath);
     }
 
     public boolean isImageAvailable() {

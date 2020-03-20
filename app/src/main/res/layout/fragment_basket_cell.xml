@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@android:color/black"
-            android:textSize="19sp"/>
+            android:textSize="@dimen/text_size_19"/>
 
         <ImageView
             android:id="@+id/delete_button"
@@ -46,15 +46,15 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/details_container"
         app:layout_constraintTop_toTopOf="@+id/image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/image"
-        android:id="@+id/details_container"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintWidth_percent="@dimen/basket_container_width"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
         android:orientation="vertical">
 
         <TextView
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@android:color/black"
-            android:textSize="16sp"/>
+            android:textSize="@dimen/text_size_16"/>
 
         <TextView
             android:id="@+id/pickup_point"
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@android:color/black"
-            android:textSize="16sp"/>
+            android:textSize="@dimen/text_size_16"/>
 
         <TextView
             android:id="@+id/pickup_time"
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@android:color/black"
-            android:textSize="16sp"/>
+            android:textSize="@dimen/text_size_16"/>
 
         <TextView
             android:id="@+id/adults"
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@android:color/black"
-            android:textSize="16sp"/>
+            android:textSize="@dimen/text_size_16"/>
 
         <TextView
             android:id="@+id/children"
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@android:color/black"
-            android:textSize="16sp"/>
+            android:textSize="@dimen/text_size_16"/>
 
         <TextView
             android:id="@+id/infants"
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@android:color/black"
-            android:textSize="16sp"/>
+            android:textSize="@dimen/text_size_16"/>
 
         <TextView
             android:id="@+id/language"
@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:fontFamily="@font/brandon_reg"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_16"
             android:textColor="@android:color/black"/>
 
     </LinearLayout>
@@ -124,7 +124,8 @@
         android:scaleType="centerCrop"
         android:layout_marginTop="20dp"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="@dimen/basket_photo_scale"
         android:contentDescription="@string/excursion_image_description" />
 
     <TextView
@@ -136,7 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/brandon_reg"
-        android:textSize="18sp"
+        android:textSize="@dimen/text_size_18"
         android:gravity="center_horizontal"
         android:textColor="@android:color/black"/>
 

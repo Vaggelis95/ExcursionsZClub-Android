@@ -1,11 +1,6 @@
 package com.zeustech.excursions.ui.navigation.basket;
 
 import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +11,6 @@ import com.bumptech.glide.Glide;
 import com.zeustech.excursions.R;
 import com.zeustech.excursions.customViews.SpanConstructor;
 import com.zeustech.excursions.models.CartModel;
-import com.zeustech.excursions.customViews.BitmapDrawableResizer;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -63,43 +57,43 @@ class BasketRecyclerAdapter extends ListAdapter<CartModel, BasketRecyclerAdapter
         viewHolder.date.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.date),
                 model.getPriceModel().getDate(),
-                ContextCompat.getColor(context, R.color.cooks_club_red)));
+                ContextCompat.getColor(context, R.color.soft_red)));
 
         viewHolder.pickup_point.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.pickup_point),
                 model.getPriceModel().getPickUpPoint(),
-                ContextCompat.getColor(context, R.color.cooks_club_red)));
+                ContextCompat.getColor(context, R.color.soft_red)));
 
         viewHolder.pickup_time.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.pickup_time),
                 model.getPriceModel().getPickUpTime(),
-                ContextCompat.getColor(context, R.color.cooks_club_red)));
+                ContextCompat.getColor(context, R.color.soft_red)));
 
         viewHolder.adults.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.adults),
                 String.valueOf(model.getPriceModel().getAdults()),
-                ContextCompat.getColor(context, R.color.cooks_club_red)));
+                ContextCompat.getColor(context, R.color.soft_red)));
 
         viewHolder.children.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.children),
                 String.valueOf(model.getPriceModel().getChildren()),
-                ContextCompat.getColor(context, R.color.cooks_club_red)));
+                ContextCompat.getColor(context, R.color.soft_red)));
 
         viewHolder.infants.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.infants),
                 String.valueOf(model.getPriceModel().getInfants()),
-                ContextCompat.getColor(context, R.color.cooks_club_red)));
+                ContextCompat.getColor(context, R.color.soft_red)));
 
         viewHolder.language.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.language),
                 model.getPriceModel().getLanguage(),
-                ContextCompat.getColor(context, R.color.cooks_club_red)));
+                ContextCompat.getColor(context, R.color.soft_red)));
 
         viewHolder.price.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.excursion_price),
                 String.format(context.getResources().getString(R.string.money_format),
                         model.getPriceModel().getFormattedPrice()),
-                ContextCompat.getColor(context, R.color.cooks_club_red)));
+                ContextCompat.getColor(context, R.color.soft_red)));
 
         Glide.with(context).load(model.getPickPath()).into(viewHolder.image);
     }
@@ -130,25 +124,15 @@ class BasketRecyclerAdapter extends ListAdapter<CartModel, BasketRecyclerAdapter
             infants = itemView.findViewById(R.id.infants);
             language = itemView.findViewById(R.id.language);
             price = itemView.findViewById(R.id.price);
-            delete_button.setBackground(deleteButtonDrawable());
             delete_button.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (onDeleteListener != null && position != RecyclerView.NO_POSITION) {
                     onDeleteListener.onDelete(getItem(position).getCode());
                 }
             });
-        }
-
-        private LayerDrawable deleteButtonDrawable() {
-            GradientDrawable shape = new GradientDrawable();
-            shape.setShape(GradientDrawable.OVAL);
-            shape.setColor(ContextCompat.getColor(context, R.color.cooks_club_red));
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) ContextCompat.getDrawable(context, R.drawable.delete_icon);
-            if (bitmapDrawable != null) {
-                bitmapDrawable = new BitmapDrawableResizer(context).resize(bitmapDrawable, Gravity.CENTER, 45, 45);
-            }
-            Drawable[] layers = { shape, bitmapDrawable };
-            return new LayerDrawable(layers);
+            Glide.with(delete_button.getContext())
+                    .load(R.drawable.delete_shape)
+                    .into(delete_button);
         }
 
     }

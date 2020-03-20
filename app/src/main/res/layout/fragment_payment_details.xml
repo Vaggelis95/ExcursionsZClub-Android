@@ -46,7 +46,7 @@
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@android:color/black"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/text_size_20"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
         <com.zeustech.excursions.customViews.HybridEditText
             android:id="@+id/card_name"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/text_field_height"
             android:padding="10dp"
             style="@style/HyperTextViewStyle"/>
 
@@ -73,7 +73,7 @@
         <com.zeustech.excursions.customViews.HybridEditText
             android:id="@+id/card_number"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/text_field_height"
             android:padding="10dp"
             android:inputType="number"
             android:maxLength="16"
@@ -101,9 +101,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/exp_year"
                 android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_marginEnd="10dp"
+                android:layout_height="@dimen/menu_item_height"
+                android:layout_marginEnd="@dimen/margin_end_10"
                 style="@style/MenuButtonStyle"/>
+
+            <ImageView
+                android:layout_height="0dp"
+                android:layout_width="@dimen/menu_arrow_size"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintTop_toBottomOf="@id/exp_month"
+                app:layout_constraintBottom_toTopOf="@id/exp_month"
+                app:layout_constraintEnd_toEndOf="@id/exp_month"
+                android:src="@drawable/keyboard_arrow_down"
+                android:contentDescription="@string/press_button"/>
 
             <TextView
                 android:id="@+id/year_headline"
@@ -115,6 +126,17 @@
                 android:text="@string/exp_year"
                 style="@style/HyperTextViewStyle"/>
 
+            <ImageView
+                android:layout_height="0dp"
+                android:layout_width="@dimen/menu_arrow_size"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintTop_toBottomOf="@id/exp_year"
+                app:layout_constraintBottom_toTopOf="@id/exp_year"
+                app:layout_constraintEnd_toEndOf="@id/exp_year"
+                android:src="@drawable/keyboard_arrow_down"
+                android:contentDescription="@string/press_button"/>
+
             <com.zeustech.excursions.customViews.MenuButton
                 android:id="@+id/exp_year"
                 app:layout_constraintTop_toBottomOf="@id/year_headline"
@@ -122,7 +144,7 @@
                 app:layout_constraintStart_toEndOf="@id/exp_month"
                 app:layout_constraintEnd_toEndOf="@id/cvv"
                 android:layout_width="0dp"
-                android:layout_height="35dp"
+                android:layout_height="@dimen/menu_item_height"
                 style="@style/MenuButtonStyle"/>
 
             <TextView
@@ -143,8 +165,8 @@
                 app:layout_constraintStart_toEndOf="@id/exp_year"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="10dp"
+                android:layout_height="@dimen/menu_item_height"
+                android:layout_marginStart="@dimen/margin_end_10"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:paddingBottom="5dp"
@@ -153,7 +175,7 @@
                 android:maxLength="4"
                 android:textAlignment="center"
                 style="@style/HyperTextViewStyle"
-                android:textSize="15sp"/>
+                android:textSize="@dimen/text_size_15"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -168,7 +190,7 @@
         <com.zeustech.excursions.customViews.HybridEditText
             android:id="@+id/email_field"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="@dimen/text_field_height"
             android:padding="10dp"
             android:inputType="textEmailAddress"
             style="@style/HyperTextViewStyle" />
@@ -183,7 +205,8 @@
         <com.zeustech.excursions.customViews.EventButton
             android:id="@+id/payment_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:textSize="@dimen/text_size_18"
             android:layout_marginTop="20dp" />
 
         <ImageView
@@ -201,7 +224,7 @@
             android:fontFamily="@font/brandon_bld"
             android:textColor="@color/black"
             android:text="@string/every_pay_headline"
-            android:textSize="18sp"/>
+            android:textSize="@dimen/text_size_18"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -210,7 +233,7 @@
             android:fontFamily="@font/brandon_reg"
             android:textColor="@color/black"
             android:text="@string/every_pay_text"
-            android:textSize="18sp"/>
+            android:textSize="@dimen/text_size_18"/>
 
     </LinearLayout>
 

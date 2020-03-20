@@ -133,5 +133,6 @@
 
     <string name="move_back">Move back</string>
     <string name="move_forward">Move forward</string>
+    <string name="press_button">Press Button</string>
 
 </resources>

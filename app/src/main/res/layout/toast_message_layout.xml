@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="13.5sp"
+        android:textSize="@dimen/text_size_14"
         android:fontFamily="@font/brandon_reg"
         android:textColor="@android:color/white"
         android:background="@color/gray"

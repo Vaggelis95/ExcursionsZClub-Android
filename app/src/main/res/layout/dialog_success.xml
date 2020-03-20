@@ -8,8 +8,8 @@
     android:background="@android:color/white">
 
     <ImageView
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="@dimen/size_55"
+        android:layout_height="@dimen/size_55"
         android:src="@drawable/check_circle"
         android:tint="@color/colorPrimary"
         android:contentDescription="@string/ic_check_description"/>

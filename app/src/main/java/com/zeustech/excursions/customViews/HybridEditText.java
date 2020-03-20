@@ -68,7 +68,7 @@ public class HybridEditText extends androidx.appcompat.widget.AppCompatEditText 
     private void setUpListeners() {
         setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                setStrokeColor(R.color.cooks_club_blue);
+                setStrokeColor(R.color.blue);
                 return;
             }
             setStrokeColor(isValid() ? R.color.black : R.color.red);

@@ -1,11 +1,11 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:left="2dp"
-        android:right="2dp"
-        android:top="2dp"
-        android:bottom="2dp">
+        android:left="@dimen/calendar_date_shape_padding"
+        android:right="@dimen/calendar_date_shape_padding"
+        android:top="@dimen/calendar_date_shape_padding"
+        android:bottom="@dimen/calendar_date_shape_padding">
         <shape android:shape="oval">
-            <solid android:color="@color/cooks_club_red"/>
+            <solid android:color="@color/soft_red"/>
         </shape>
     </item>
 </layer-list>

@@ -5,14 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zeustech.excursions.R;
 import com.zeustech.excursions.models.ExTicketModel;
 import com.zeustech.excursions.customViews.DateManager;
+import com.zeustech.excursions.tools.ScreenManager;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -35,6 +39,19 @@ public class TicketsRecyclerAdapter extends RecyclerView.Adapter<TicketsRecycler
     @Override
     public TicketsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_tickets_cell, viewGroup, false);
+        ConstraintLayout div = view.findViewById(R.id.div);
+        LinearLayout container = view.findViewById(R.id.container);
+        ImageView image = view.findViewById(R.id.image);
+
+        ConstraintSet set = new ConstraintSet();
+        set.clone(div);
+        set.connect(
+                ScreenManager.isPhone(viewGroup.getContext()) ? container.getId() : image.getId(),
+                ConstraintSet.BOTTOM,
+                div.getId(),
+                ConstraintSet.BOTTOM
+        );
+        set.applyTo(div);
         return new TicketsViewHolder(view);
     }
 
@@ -53,10 +70,10 @@ public class TicketsRecyclerAdapter extends RecyclerView.Adapter<TicketsRecycler
             viewHolder.excDate.setText(formattedDate);
         }
         if (model.getStatus() == 2) {
-            viewHolder.excDate.setTextColor(res.getColor(R.color.cooks_club_red));
+            viewHolder.excDate.setTextColor(res.getColor(R.color.soft_red));
             viewHolder.status.setVisibility(View.VISIBLE);
         } else {
-            viewHolder.excDate.setTextColor(res.getColor(R.color.cooks_club_blue));
+            viewHolder.excDate.setTextColor(res.getColor(R.color.blue));
             viewHolder.status.setVisibility(View.INVISIBLE);
         }
     }

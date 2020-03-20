@@ -15,7 +15,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:paddingTop="@dimen/main_header_top_bottom_padding"
+        android:paddingBottom="@dimen/main_header_top_bottom_padding"
+        android:paddingStart="@dimen/main_header_start_end_padding"
+        android:paddingEnd="@dimen/main_header_start_end_padding">
 
         <TextView
             android:id="@+id/headline"
@@ -29,12 +32,13 @@
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:text="@string/your_next_adventure"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_size_18" />
 
         <ImageView
             android:id="@+id/logout_img"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/logout_button_height"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="@id/headline"
             app:layout_constraintBottom_toBottomOf="@id/headline"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,8 +48,9 @@
 
         <ImageView
             android:id="@+id/search_btn"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/search_button_height"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="@id/headline"
             app:layout_constraintBottom_toBottomOf="@id/headline"
             app:layout_constraintEnd_toEndOf="parent"
@@ -68,6 +73,7 @@
         android:id="@+id/navigation_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:itemIconSize="@dimen/navigation_bottom_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,6 +81,15 @@
         app:itemIconTint="@color/navigation_bottom_color"
         android:background="@android:color/white"
         android:theme="@style/Widget.BottomNavigationView">
+
+        <!--app:itemBackground="@drawable/nav_drawer_selector_background"
+        app:itemHorizontalPadding="@dimen/twenty_two_dip"
+        app:itemIconPadding="@dimen/fourteen_dip"
+        app:itemIconSize="@dimen/twenty_four_dip"
+        app:itemIconTint="@drawable/nav_drawer_selector"
+        app:itemTextAppearance="@style/nav_bar_style_text_appearance"
+        app:itemTextColor="@drawable/nav_drawer_selector"
+        app:menu="@menu/navigation_drawer"-->
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

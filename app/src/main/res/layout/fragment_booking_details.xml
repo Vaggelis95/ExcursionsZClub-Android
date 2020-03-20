@@ -14,35 +14,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp">
+        android:paddingTop="20dp"
+        android:paddingBottom="40dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/calendar_margin_bottom">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/calendar_header"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/calendar_view"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:padding="8dp">
+                app:layout_constraintStart_toStartOf="@id/calendar_view"
+                app:layout_constraintEnd_toEndOf="@id/calendar_view"
+                android:paddingStart="@dimen/calendar_header_padding_start_end"
+                android:paddingEnd="@dimen/calendar_header_padding_start_end">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/back_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/calendar_arrow_height"
+                    app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:src="@drawable/ic_arrow_back"
-                    android:contentDescription="@string/move_back"
-                    android:tint="@color/calendar_arrows_color"
-                    android:background="@android:color/transparent"/>
+                    android:contentDescription="@string/move_back"/>
 
                 <TextView
                     android:id="@+id/current_month_headline"
@@ -55,16 +58,16 @@
                     android:textAllCaps="true"
                     style="@style/CalendarHeaderTextStyle"/>
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/forward_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/calendar_arrow_height"
+                    app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:src="@drawable/ic_arrow_forward"
                     android:contentDescription="@string/move_forward"
-                    android:tint="@color/calendar_arrows_color"
                     android:background="@android:color/transparent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -73,15 +76,17 @@
                 android:id="@+id/calendar_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:layout_constraintWidth_percent="@dimen/calendar_width"
                 app:layout_constraintTop_toBottomOf="@id/calendar_header"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:mcv_selectionColor="@color/cooks_club_red"
+
+                app:mcv_selectionColor="@color/soft_red"
+                app:mcv_firstDayOfWeek="monday"
                 app:mcv_headerTextAppearance="@style/CalendarHeaderTextStyle"
                 app:mcv_weekDayTextAppearance="@style/CalendarWeekDayTextStyle"
-                app:mcv_dateTextAppearance="@style/CalendarDateTextStyle"
-                android:background="@android:color/transparent" />
+                app:mcv_dateTextAppearance="@style/CalendarDateTextStyle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -89,17 +94,20 @@
             android:id="@+id/selected_days"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="40dp"
-            android:textColor="@android:color/black"
             android:fontFamily="@font/brandon_reg"
-            android:textSize="18sp"
-            android:text="@string/selected_date"/>
+            android:layout_marginStart="@dimen/booking_items_margin_start_end"
+            android:layout_marginEnd="@dimen/booking_items_margin_start_end"
+            android:text="@string/selected_date"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_18" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="@dimen/booking_items_margin_start_end"
+            android:layout_marginEnd="@dimen/booking_items_margin_start_end">
 
             <TextView
                 android:id="@+id/adults_headline"
@@ -119,10 +127,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/children"
                 android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_marginEnd="10dp"
+                android:layout_height="@dimen/menu_item_height"
+                android:layout_marginEnd="@dimen/margin_end_10"
                 android:text="@string/num_2"
                 style="@style/MenuButtonStyle"/>
+
+            <ImageView
+                android:layout_height="0dp"
+                android:layout_width="@dimen/menu_arrow_size"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintTop_toBottomOf="@id/adults"
+                app:layout_constraintBottom_toTopOf="@id/adults"
+                app:layout_constraintEnd_toEndOf="@id/adults"
+                android:src="@drawable/keyboard_arrow_down"
+                android:contentDescription="@string/press_button"/>
 
             <TextView
                 android:id="@+id/adults_tip"
@@ -132,7 +151,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/valid_adults_age"
-                style="@style/HyperTextDescription"/>
+                android:textColor="@color/gray"
+                style="@style/HyperTextDescription" />
 
             <TextView
                 android:id="@+id/children_headline"
@@ -150,11 +170,23 @@
                 app:layout_constraintTop_toTopOf="@+id/adults"
                 app:layout_constraintBottom_toBottomOf="@+id/adults"
                 app:layout_constraintStart_toEndOf="@id/adults"
-                app:layout_constraintEnd_toEndOf="@id/infants"
+                app:layout_constraintEnd_toStartOf="@id/infants"
                 android:layout_width="0dp"
-                android:layout_height="35dp"
+                android:layout_height="@dimen/menu_item_height"
+                android:layout_marginEnd="@dimen/margin_end_10"
                 android:text="@string/num_0"
                 style="@style/MenuButtonStyle"/>
+
+            <ImageView
+                android:layout_height="0dp"
+                android:layout_width="@dimen/menu_arrow_size"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintTop_toBottomOf="@id/children"
+                app:layout_constraintBottom_toTopOf="@id/children"
+                app:layout_constraintEnd_toEndOf="@id/children"
+                android:src="@drawable/keyboard_arrow_down"
+                android:contentDescription="@string/press_button"/>
 
             <TextView
                 android:id="@+id/children_tip"
@@ -164,6 +196,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/valid_children_age"
+                android:textColor="@color/gray"
                 style="@style/HyperTextDescription"/>
 
             <TextView
@@ -184,10 +217,20 @@
                 app:layout_constraintStart_toEndOf="@id/children"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="10dp"
+                android:layout_height="@dimen/menu_item_height"
                 android:text="@string/num_0"
                 style="@style/MenuButtonStyle"/>
+
+            <ImageView
+                android:layout_height="0dp"
+                android:layout_width="@dimen/menu_arrow_size"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintTop_toBottomOf="@id/infants"
+                app:layout_constraintBottom_toTopOf="@id/infants"
+                app:layout_constraintEnd_toEndOf="@id/infants"
+                android:src="@drawable/keyboard_arrow_down"
+                android:contentDescription="@string/press_button"/>
 
             <TextView
                 android:id="@+id/infants_tip"
@@ -197,13 +240,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/valid_infants"
+                android:textColor="@color/gray"
                 style="@style/HyperTextDescription"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/booking_items_margin_start_end"
+            android:layout_marginEnd="@dimen/booking_items_margin_start_end">
 
             <TextView
                 android:id="@+id/exc_language_headline"
@@ -214,6 +260,17 @@
                 android:text="@string/excursion_language"
                 style="@style/HyperTextViewStyle"/>
 
+            <ImageView
+                android:layout_height="0dp"
+                android:layout_width="@dimen/menu_arrow_size"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintTop_toBottomOf="@id/language"
+                app:layout_constraintBottom_toTopOf="@id/language"
+                app:layout_constraintEnd_toEndOf="@id/language"
+                android:src="@drawable/keyboard_arrow_down"
+                android:contentDescription="@string/press_button"/>
+
             <com.zeustech.excursions.customViews.MenuButton
                 android:id="@+id/language"
                 app:layout_constraintTop_toBottomOf="@id/exc_language_headline"
@@ -221,10 +278,10 @@
                 app:layout_constraintEnd_toEndOf="@id/exc_language_headline"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="0dp"
-                android:layout_height="35dp"
+                android:layout_height="@dimen/menu_item_height"
                 android:textAllCaps="false"
                 android:text="@string/english"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_size_18"
                 style="@style/MenuButtonStyle"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -241,57 +298,69 @@
             android:id="@+id/exc_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/booking_items_margin_start_end"
+            android:layout_marginEnd="@dimen/booking_items_margin_start_end"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@android:color/black"
-            android:textSize="19sp"/>
+            android:textSize="@dimen/text_size_19"/>
 
         <TextView
             android:id="@+id/pickup_point"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/booking_items_margin_start_end"
+            android:layout_marginEnd="@dimen/booking_items_margin_start_end"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_18"
             android:text="@string/pickup_point"/>
 
         <TextView
             android:id="@+id/pickup_time"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/booking_items_margin_start_end"
+            android:layout_marginEnd="@dimen/booking_items_margin_start_end"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_18"
             android:text="@string/pickup_time"/>
 
         <TextView
             android:id="@+id/price"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/booking_items_margin_start_end"
+            android:layout_marginEnd="@dimen/booking_items_margin_start_end"
             android:fontFamily="@font/brandon_reg"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_18"
             android:text="@string/excursion_price"/>
 
         <TextView
             android:id="@+id/included_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/booking_items_margin_start_end"
+            android:layout_marginEnd="@dimen/booking_items_margin_start_end"
             android:textColor="@android:color/black"
             android:visibility="invisible"
-            android:layout_marginTop="10dp"
             android:text="@string/included"
             style="@style/HyperTextViewStyle"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp">
+            android:layout_marginBottom="25dp"
+            android:layout_marginStart="@dimen/booking_items_margin_start_end"
+            android:layout_marginEnd="@dimen/booking_items_margin_start_end">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/included_recycler_view"
@@ -304,16 +373,21 @@
         <com.zeustech.excursions.customViews.EventButton
             android:id="@+id/cart_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_height"
             android:layout_marginBottom="10dp"
+            android:layout_marginStart="@dimen/booking_items_margin_start_end"
+            android:layout_marginEnd="@dimen/booking_items_margin_start_end"
+            android:textSize="@dimen/text_size_18"
             android:text="@string/add_to_cart"/>
 
         <com.zeustech.excursions.customViews.EventButton
             android:id="@+id/next_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/next"
-            android:layout_marginBottom="40dp"/>
+            android:layout_height="@dimen/button_height"
+            android:layout_marginStart="@dimen/booking_items_margin_start_end"
+            android:layout_marginEnd="@dimen/booking_items_margin_start_end"
+            android:textSize="@dimen/text_size_18"
+            android:text="@string/next" />
 
     </LinearLayout>
 

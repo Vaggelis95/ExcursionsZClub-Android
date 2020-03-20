@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -19,6 +18,7 @@ import android.widget.TextView;
 
 import com.zeustech.excursions.R;
 
+import com.zeustech.excursions.tools.ScreenDialogFragment;
 import com.zeustech.excursions.ui.booking.customer.CustomerDetailsFragment;
 import com.zeustech.excursions.ui.booking.details.BookingDetailsFragment;
 import com.zeustech.excursions.ui.booking.payment.PaymentDetailsFragment;
@@ -26,7 +26,7 @@ import com.zeustech.excursions.customViews.CustomViewPager;
 import com.zeustech.excursions.customViews.OnBasketClickListener;
 import com.zeustech.excursions.viewModels.GlobalVM;
 
-public class BookingFragment extends DialogFragment {
+public class BookingFragment extends ScreenDialogFragment {
 
     private static final String PAGE_INDEX = "index";
 
@@ -51,10 +51,6 @@ public class BookingFragment extends DialogFragment {
         this.onBasketClickListener = onBasketClickListener;
     }
 
-    public BookingFragment() {
-        // Required empty public constructor
-    }
-
     public static BookingFragment newInstance(int index) {
         BookingFragment fragment = new BookingFragment();
         Bundle args = new Bundle();
@@ -63,14 +59,18 @@ public class BookingFragment extends DialogFragment {
         return fragment;
     }
 
+    public BookingFragment() {
+        // Required empty public constructor
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.FadeFragmentTheme);
         if (getArguments() != null) {
             index = getArguments().getInt(PAGE_INDEX);
         }
         globalVM = new ViewModelProvider(getActivity() != null ? getActivity() : this).get(GlobalVM.class);
+        setFullScreen(true);
     }
 
     @Override

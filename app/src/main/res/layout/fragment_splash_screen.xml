@@ -10,24 +10,27 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/widget"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="150dp"
+        app:layout_constraintWidth_percent="0.28"
+        app:layout_constraintDimensionRatio="1:1"
         android:src="@drawable/splash_screen_icon"
         android:contentDescription="@string/zeus_hotels"/>
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/widget"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/splash_progress_bar_height"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:indicatorName="BallClipRotateIndicator"
-        app:indicatorColor="#00345C"/>
+        app:indicatorColor="@color/colorPrimaryDark"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

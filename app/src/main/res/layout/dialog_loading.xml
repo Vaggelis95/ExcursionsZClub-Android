@@ -25,7 +25,7 @@
             android:layout_height="100dp"
             android:visibility="visible"
             app:indicatorName="BallClipRotateIndicator"
-            app:indicatorColor="@color/cooks_club_blue"/>
+            app:indicatorColor="@color/blue"/>
 
         <TextView
             android:id="@+id/text"

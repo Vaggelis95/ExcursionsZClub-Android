@@ -7,16 +7,16 @@
 
     <TextView
         android:id="@+id/text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
         android:textColor="@color/black"
         android:padding="5dp"
-        android:textSize="17sp"
+        android:textSize="@dimen/text_size_17"
         android:fontFamily="@font/brandon_light"
         android:background="@android:color/white"/>
 

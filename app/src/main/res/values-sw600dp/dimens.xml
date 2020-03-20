@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--Font Size-->
+    <dimen name="text_size_20">25sp</dimen>
+    <dimen name="text_size_19">24sp</dimen>
+    <dimen name="text_size_18_5">23.5sp</dimen>
+    <dimen name="text_size_18">23sp</dimen>
+    <dimen name="text_size_17">22sp</dimen>
+    <dimen name="text_size_16_5">21.5sp</dimen>
+    <dimen name="text_size_16">21sp</dimen>
+    <dimen name="text_size_15">20sp</dimen>
+    <dimen name="text_size_14_5">19.5sp</dimen>
+    <dimen name="text_size_14">19sp</dimen>
+    <dimen name="text_size_12">17sp</dimen>
+
+    <!--SplashScreen Fragment-->
+    <dimen name="splash_progress_bar_height">80dp</dimen>
+
+    <!--Login Fragment-->
+    <dimen name="button_height">62dp</dimen>
+    <dimen name="search_widget_height">70dp</dimen>
+    <dimen name="search_widget_clear_height">30dp</dimen>
+    <dimen name="search_widget_clear_margin_end">20dp</dimen>
+    <dimen name="search_widget_padding_start">20dp</dimen>
+    <dimen name="search_widget_padding_end">40dp</dimen>
+    <dimen name="progress_bar_height">35dp</dimen>
+
+    <!--Excursions List-->
+    <dimen name="excursion_cell_start_end_padding">10dp</dimen>
+    <dimen name="excursion_cell_no_image_height">185dp</dimen>
+    <dimen name="excursion_cell_image_height">250dp</dimen>
+
+    <!--Main Fragment-->
+    <dimen name="logout_button_height">35dp</dimen>
+    <dimen name="search_button_height">30dp</dimen>
+    <dimen name="main_header_top_bottom_padding">20dp</dimen>
+    <dimen name="main_header_start_end_padding">25dp</dimen>
+
+    <dimen name="navigation_bottom_icon_size">34dp</dimen>
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">16sp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">18sp</dimen>
+    <dimen name="design_bottom_navigation_height" tools:override="true">72dp</dimen>
+
+    <!--Excursions Details-->
+    <dimen name="dialog_image_height">400dp</dimen>
+
+    <!--Header-->
+    <dimen name="header_item_size">35dp</dimen>
+
+    <!--Calendar-->
+    <item name="calendar_width" format="float" type="dimen">0.8</item>
+    <dimen name="calendar_arrow_height">35dp</dimen>
+    <dimen name="calendar_header_padding_start_end">20dp</dimen>
+    <dimen name="calendar_date_shape_padding">18dp</dimen>
+    <dimen name="calendar_margin_bottom">0dp</dimen>
+
+    <!--Booking Details Fragment-->
+    <dimen name="booking_items_margin_start_end">30dp</dimen>
+    <dimen name="persons_margin_end">40dp</dimen>
+    <dimen name="menu_item_height">50dp</dimen>
+
+    <dimen name="menu_arrow_size">30dp</dimen>
+
+    <dimen name="margin_end_10">30dp</dimen>
+    <dimen name="text_field_height">55dp</dimen>
+
+    <!--Basket Fragment-->
+    <item name="basket_container_width" format="float" type="dimen">0.6</item>
+    <item name="basket_photo_scale" type="dimen">1:0.60</item>
+
+    <!--Tickets Fragment-->
+    <dimen name="tickets_cell_margin_top">4dp</dimen>
+    <dimen name="print_ticket_height">60dp</dimen>
+    <item name="barcode_size" format="float" type="dimen">0.3</item>
+
+    <dimen name="padding_30">45dp</dimen>
+    <dimen name="padding_25">40dp</dimen>
+    <dimen name="size_55">70dp</dimen>
+
+</resources>

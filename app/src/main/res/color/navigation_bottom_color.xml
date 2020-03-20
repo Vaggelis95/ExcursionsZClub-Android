@@ -3,7 +3,7 @@
 
     <item
         android:state_checked="true"
-        android:color="@color/cooks_club_blue"/>
+        android:color="@color/blue"/>
 
     <item
         android:state_checked="false"

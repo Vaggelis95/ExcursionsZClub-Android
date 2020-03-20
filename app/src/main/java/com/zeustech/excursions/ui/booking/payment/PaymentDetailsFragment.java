@@ -100,8 +100,8 @@ public class PaymentDetailsFragment extends Fragment {
         exp_month = view.findViewById(R.id.exp_month);
         exp_year = view.findViewById(R.id.exp_year);
 
-        setUpView();
-        setUpDialogs();
+        setUpView(view);
+        setUpDialogs(view);
         setUpListeners();
         globalVM.getCartPrice().observe(getViewLifecycleOwner(), this::updateView);
     }
@@ -117,7 +117,7 @@ public class PaymentDetailsFragment extends Fragment {
             total_payment.setText(SpanConstructor.apply(
                     getResources().getString(R.string.total_payment),
                     String.format(getResources().getString(R.string.money_format), formattedPrice),
-                    ContextCompat.getColor(activity, R.color.cooks_club_red)));
+                    ContextCompat.getColor(activity, R.color.soft_red)));
             payment_button.setText(String.format(getResources().getString(R.string.pay), formattedPrice));
         } catch (IllegalFormatException e) {
             e.printStackTrace();
@@ -136,10 +136,10 @@ public class PaymentDetailsFragment extends Fragment {
         }
     }
 
-    private void setUpView() {
-        adapter = new PaymentRecyclerAdapter(activity);
+    private void setUpView(@NonNull View view) {
+        adapter = new PaymentRecyclerAdapter(view.getContext());
         recycler_view.setAdapter(adapter);
-        recycler_view.setLayoutManager(new LinearLayoutManager(activity));
+        recycler_view.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recycler_view.setHasFixedSize(true);
         email_field.setMinCharCount(1);
         card_number.setMinCharCount(9);
@@ -147,17 +147,17 @@ public class PaymentDetailsFragment extends Fragment {
         cvv.setMinCharCount(3);
         setUpYearMenu();
         exp_month.getMenu().inflate(R.menu.month_list);
-        payment_button.applyStyle(activity, EventButton.Style.TRANSPARENT);
+        payment_button.applyStyle(view.getContext(), EventButton.Style.TRANSPARENT);
     }
 
-    private void setUpDialogs() {
-        loadingDialog = new Dialog(activity);
+    private void setUpDialogs(@NonNull View view) {
+        loadingDialog = new Dialog(view.getContext(), R.style.PopUpDialogTheme);
         loadingDialog.setCancelable(false);
         loadingDialog.setContentView(R.layout.dialog_loading);
         TextView textView = loadingDialog.findViewById(R.id.text);
         textView.setText(getResources().getString(R.string.processing));
 
-        successDialog = new Dialog(activity);
+        successDialog = new Dialog(view.getContext(), R.style.PopUpDialogTheme);
         successDialog.setContentView(R.layout.dialog_success);
 
         TextView top = successDialog.findViewById(R.id.text_top);
@@ -176,7 +176,7 @@ public class PaymentDetailsFragment extends Fragment {
             successDialog.setOnDismissListener(dialog -> parent.dismiss());
         }
 
-        errorDialog = new Dialog(activity);
+        errorDialog = new Dialog(view.getContext(), R.style.PopUpDialogTheme);
         errorDialog.setContentView(R.layout.dialog_error);
     }
 

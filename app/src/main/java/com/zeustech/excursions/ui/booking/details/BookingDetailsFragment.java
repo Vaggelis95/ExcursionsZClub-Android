@@ -20,7 +20,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -36,6 +36,7 @@ import com.zeustech.excursions.customViews.ToastMessage;
 import com.zeustech.excursions.models.ExLanguageModel;
 import com.zeustech.excursions.models.ExPriceModel;
 import com.zeustech.excursions.customViews.DateManager;
+import com.zeustech.excursions.tools.ColorManager;
 import com.zeustech.excursions.viewModels.GlobalVM;
 
 import org.threeten.bp.format.TextStyle;
@@ -53,7 +54,7 @@ public class BookingDetailsFragment extends Fragment implements MenuButton.OnMen
     private IncludedRecyclerAdapter includedAdapter;
 
     private MaterialCalendarView calendarView;
-    private ImageButton backButton, forwardButton;
+    private ImageView backButton, forwardButton;
     private TextView currentMonthHeadline;
 
     private TextView selectedDateField, excursionNameField, pickUpPointField, pickUpTimeField, priceField;
@@ -115,7 +116,7 @@ public class BookingDetailsFragment extends Fragment implements MenuButton.OnMen
         toastMessage = new ToastMessage(activity);
         toastMessage.setTextColor(Color.WHITE).setBackgroundColor(Color.BLACK);
 
-        messageDialog = new Dialog(view.getContext());
+        messageDialog = new Dialog(view.getContext(), R.style.PopUpDialogTheme);
         messageDialog.setContentView(R.layout.dialog_error);
 
         adultsBtn.getMenu().inflate(R.menu.adults_list);
@@ -126,6 +127,13 @@ public class BookingDetailsFragment extends Fragment implements MenuButton.OnMen
 
         globalVM.fetchAvailableLanguages();
         globalVM.initAvailableDates();
+
+        ColorManager.setTint(
+                new ArrayList<ImageView>() {{
+                    add(backButton);
+                    add(forwardButton);
+                }},
+                R.color.calendar_arrows_color);
 
         initCalendar();
         setUpListeners();
@@ -155,7 +163,7 @@ public class BookingDetailsFragment extends Fragment implements MenuButton.OnMen
         calendarView.setOnDateChangedListener((widget, date, selected) -> {
             selectedDateField.setText(SpanConstructor.apply(activity.getResources().getString(R.string.selected_date),
                     date.getDay() + "th of " + date.getDate().getMonth().getDisplayName(TextStyle.FULL, Locale.US),
-                    ContextCompat.getColor(activity, R.color.cooks_club_red)));
+                    ContextCompat.getColor(activity, R.color.soft_red)));
             updatePrice();
         });
 
@@ -275,7 +283,7 @@ public class BookingDetailsFragment extends Fragment implements MenuButton.OnMen
         @Override
         public void decorate(DayViewFacade view) {
             if (getContext() != null) {
-                Drawable drawable = getContext().getDrawable(R.drawable.calendar_selection_drawable);
+                Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.calendar_selection_drawable);
                 if (drawable != null) view.setSelectionDrawable(drawable);
             }
         }
@@ -299,7 +307,7 @@ public class BookingDetailsFragment extends Fragment implements MenuButton.OnMen
             pickUpPointField.setText(SpanConstructor.apply(
                     getResources().getString(R.string.pickup_point),
                     pickUpPoint,
-                    ContextCompat.getColor(activity, R.color.cooks_club_red))
+                    ContextCompat.getColor(activity, R.color.soft_red))
             );
         } else {
             pickUpPointField.setText(R.string.pickup_point);
@@ -308,7 +316,7 @@ public class BookingDetailsFragment extends Fragment implements MenuButton.OnMen
             pickUpTimeField.setText(SpanConstructor.apply(
                     getResources().getString(R.string.pickup_time),
                     pickUpTime,
-                    ContextCompat.getColor(activity, R.color.cooks_club_red))
+                    ContextCompat.getColor(activity, R.color.soft_red))
             );
         } else {
             pickUpTimeField.setText(R.string.pickup_time);
@@ -317,7 +325,7 @@ public class BookingDetailsFragment extends Fragment implements MenuButton.OnMen
             this.priceField.setText(SpanConstructor.apply(
                     getResources().getString(R.string.excursion_price),
                     String.format(getResources().getString(R.string.money_format), price),
-                    ContextCompat.getColor(activity, R.color.cooks_club_red))
+                    ContextCompat.getColor(activity, R.color.soft_red))
             );
         } else {
             this.priceField.setText(R.string.excursion_price);
