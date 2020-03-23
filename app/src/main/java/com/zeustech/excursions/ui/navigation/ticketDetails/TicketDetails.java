@@ -136,12 +136,12 @@ public class TicketDetails extends ScreenDialogFragment {
         BixolonManager.getInstance(getContext())
                 .connectPrintDisconnect(model, new CompletionHandler<String>() {
                     @Override
-                    public void onSuccess(@NonNull String model) {
+                    public void onSuccess(@NonNull String model, int status) {
                         applyState(view, State.SUCCESS, model);
                     }
 
                     @Override
-                    public void onFailure(@Nullable String description) {
+                    public void onFailure(@Nullable String description, int status) {
                         applyState(view, State.ERROR, description);
                     }
                 });

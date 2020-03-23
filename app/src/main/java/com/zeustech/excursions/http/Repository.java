@@ -6,7 +6,6 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zeustech.excursions.callbacks.CompletionHandler;
-import com.zeustech.excursions.callbacks.CompletionLogin;
 import com.zeustech.excursions.http.requests.BookRequest;
 import com.zeustech.excursions.http.requests.ExcursionProgramRequest;
 import com.zeustech.excursions.http.requests.ExcursionRequest;
@@ -58,7 +57,6 @@ public class Repository {
     private static volatile Repository INSTANCE = null;
 
     private final String credentials;
-    private final LoginRequest loginRequest;
 
     private final ZenixExcursionsApi api;
     private final Gson gsonHelper;
@@ -80,7 +78,6 @@ public class Repository {
         String password = server.getPassword();
 
         credentials = Credentials.basic(userName, password);
-        loginRequest = new LoginRequest(userName, password);
 
         OkHttpClient client = OkHttpSingleton.getInstance(context).getClient();
         api = new Retrofit.Builder()
@@ -90,6 +87,11 @@ public class Repository {
                 .build().create(ZenixExcursionsApi.class);
 
         gsonHelper = new Gson();
+    }
+
+    @EverythingIsNonNull
+    public void login(LoginRequest request, CompletionHandler<ExLoginModel> completion) {
+        request(api.setExcLogin(credentials, request), ExLoginModel.class, completion);
     }
 
     @EverythingIsNonNull
@@ -105,50 +107,11 @@ public class Repository {
     }
 
     @EverythingIsNonNull
-    public void login(LoginRequest request, CompletionHandler<ExLoginModel> completion) {
-        request(api.setExcLogin(credentials, request), ExLoginModel.class, completion);
-    }
-
-    @EverythingIsNonNull
     public void getExcursions(String hotelCode, String customer, String language,
                               CompletionHandler<List<ExcursionsModel>> completion) {
-        // TODO: 202
         Type type = new TypeToken<ArrayList<ExcursionsModel>>() {}.getType();
-        ExcursionsRequest request = new ExcursionsRequest(hotelCode, language, customer);
+        ExcursionsRequest request = new ExcursionsRequest(hotelCode, customer, language);
         request(api.getExcursions(credentials, request), type, completion);
-    }
-
-    // TODO: Remove it
-    @EverythingIsNonNull
-    public void init(String hotelCode, String language, CompletionLogin completion) {
-        init(loginRequest, hotelCode, language, completion);
-    }
-
-    @EverythingIsNonNull
-    private void init(LoginRequest request, String hotelCode, String language, CompletionLogin completion) {
-
-        login(request, new CompletionHandler<ExLoginModel>() {
-            @Override
-            public void onSuccess(@NonNull ExLoginModel login) {
-
-                getExcursions(hotelCode, login.getCustomer(), language, new CompletionHandler<List<ExcursionsModel>>() {
-                    @Override
-                    public void onSuccess(@NonNull List<ExcursionsModel> excursions) {
-                        completion.onSuccess(login, excursions);
-                    }
-
-                    @Override
-                    public void onFailure(@Nullable String description) {
-                        completion.onFailure(description);
-                    }
-                });
-            }
-
-            @Override
-            public void onFailure(@Nullable String description) {
-                completion.onFailure(description);
-            }
-        });
     }
 
     @EverythingIsNonNull
@@ -225,7 +188,7 @@ public class Repository {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                completion.onFailure(t.getMessage());
+                completion.onFailure(t.getMessage(), -1);
             }
         });
     }
@@ -255,9 +218,9 @@ public class Repository {
             e.printStackTrace();
         }
         if (model != null) {
-            completion.onSuccess(model);
+            completion.onSuccess(model, status);
         } else {
-            completion.onFailure(message);
+            completion.onFailure(message, status);
         }
     }
 

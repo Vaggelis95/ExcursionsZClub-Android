@@ -20,11 +20,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.couchbase.lite.CouchbaseLiteException;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.zeustech.excursions.R;
 import com.zeustech.excursions.customViews.OnBasketClickListener;
-import com.zeustech.excursions.database.DatabaseManager;
 import com.zeustech.excursions.ui.navigation.basket.BasketFragment;
 import com.zeustech.excursions.ui.navigation.excursionDetails.ExcursionDetails;
 import com.zeustech.excursions.ui.navigation.excursionsList.ExcursionsFragment;
@@ -148,13 +146,9 @@ public class MainFragment extends Fragment implements OnBasketClickListener {
 
         logoutImg.setOnClickListener(view -> logoutDialog.show());
         logoutBtn.setOnClickListener(view -> {
-            try {
-                DatabaseManager.getInstance(getContext()).eraseDatabase();
-                logoutDialog.dismiss();
-                navController.navigate(R.id.action_main_to_splashScreen);
-            } catch (CouchbaseLiteException e) {
-                e.printStackTrace();
-            }
+            globalVM.eraseDatabase();
+            logoutDialog.dismiss();
+            navController.navigate(R.id.action_main_to_splashScreen);
         });
     }
 

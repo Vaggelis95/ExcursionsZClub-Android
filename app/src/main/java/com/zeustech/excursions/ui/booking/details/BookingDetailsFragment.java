@@ -163,7 +163,7 @@ public class BookingDetailsFragment extends Fragment implements MenuButton.OnMen
         calendarView.setOnDateChangedListener((widget, date, selected) -> {
             selectedDateField.setText(SpanConstructor.apply(activity.getResources().getString(R.string.selected_date),
                     date.getDay() + "th of " + date.getDate().getMonth().getDisplayName(TextStyle.FULL, Locale.US),
-                    ContextCompat.getColor(activity, R.color.soft_red)));
+                    ContextCompat.getColor(activity, R.color.softRed)));
             updatePrice();
         });
 
@@ -307,7 +307,7 @@ public class BookingDetailsFragment extends Fragment implements MenuButton.OnMen
             pickUpPointField.setText(SpanConstructor.apply(
                     getResources().getString(R.string.pickup_point),
                     pickUpPoint,
-                    ContextCompat.getColor(activity, R.color.soft_red))
+                    ContextCompat.getColor(activity, R.color.softRed))
             );
         } else {
             pickUpPointField.setText(R.string.pickup_point);
@@ -316,7 +316,7 @@ public class BookingDetailsFragment extends Fragment implements MenuButton.OnMen
             pickUpTimeField.setText(SpanConstructor.apply(
                     getResources().getString(R.string.pickup_time),
                     pickUpTime,
-                    ContextCompat.getColor(activity, R.color.soft_red))
+                    ContextCompat.getColor(activity, R.color.softRed))
             );
         } else {
             pickUpTimeField.setText(R.string.pickup_time);
@@ -325,7 +325,7 @@ public class BookingDetailsFragment extends Fragment implements MenuButton.OnMen
             this.priceField.setText(SpanConstructor.apply(
                     getResources().getString(R.string.excursion_price),
                     String.format(getResources().getString(R.string.money_format), price),
-                    ContextCompat.getColor(activity, R.color.soft_red))
+                    ContextCompat.getColor(activity, R.color.softRed))
             );
         } else {
             this.priceField.setText(R.string.excursion_price);

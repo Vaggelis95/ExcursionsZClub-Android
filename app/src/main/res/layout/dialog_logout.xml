@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_18"
         android:fontFamily="@font/brandon_reg"
-        android:textColor="@color/dark_gray"
+        android:textColor="@color/darkGray"
         android:text="@string/logout_warning"/>
 
     <Button

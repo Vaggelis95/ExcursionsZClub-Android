@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="@id/image"
         app:layout_constraintEnd_toEndOf="@id/image"
-        android:tint="@color/light_gray"
+        android:tint="@color/lightGray"
         android:contentDescription="@string/image_not_available"/>
 
     <TextView
@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="@id/image"
         android:textAlignment="center"
         android:fontFamily="@font/brandon_med"
-        android:textColor="@color/light_gray"
+        android:textColor="@color/lightGray"
         android:text="@string/image_not_available"
         android:textAllCaps="true"
         android:textSize="@dimen/text_size_17" />

@@ -7,7 +7,13 @@ import androidx.annotation.NonNull;
 
 public class ExLoginModel implements Parcelable {
 
-    private String seller, company, customer;
+    final String seller, company, customer;
+
+    ExLoginModel(String seller, String company, String customer) {
+        this.seller = seller;
+        this.company = company;
+        this.customer = customer;
+    }
 
     public String getSeller() {
         return seller;

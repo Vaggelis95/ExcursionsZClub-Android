@@ -5,7 +5,7 @@
         android:top="2dp"
         android:bottom="2dp">
         <shape android:shape="oval">
-            <solid android:color="@color/soft_red"/>
+            <solid android:color="@color/softRed"/>
         </shape>
     </item>
 </layer-list>

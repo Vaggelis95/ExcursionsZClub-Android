@@ -16,15 +16,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zeustech.excursions.R;
-import com.zeustech.excursions.callbacks.CompletionHandler;
 import com.zeustech.excursions.viewModels.GlobalVM;
 
-public class SplashScreenFragment extends Fragment {
+public class SplashScreenFragment extends Fragment implements View.OnClickListener {
 
     private NavController navController;
     private GlobalVM globalVM;
     private Dialog connectionDialog;
-    private boolean loggedIn = false;
 
     public SplashScreenFragment() {
         // Required empty public constructor
@@ -47,58 +45,42 @@ public class SplashScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        connectionDialog = new Dialog(view.getContext(), R.style.PopUpDialogTheme);
-        setUpDialog();
-        loggedIn = (globalVM.getSelectedHotel() != null);
-        if (loggedIn) { // Already Logged in
-            init();
-        } else {
-            getAreas();
-        }
+        setUpDialog(view);
+        init();
     }
 
-    private void getAreas() {
-        if (connectionDialog.isShowing()) { connectionDialog.dismiss(); }
-        globalVM.getAreas(new CompletionHandler<Boolean>() {
-            @Override
-            public void onSuccess(@NonNull Boolean model) {
-                if (connectionDialog.isShowing()) { connectionDialog.dismiss(); }
-                navController.navigate(R.id.action_splashScreen_to_login);
-            }
-
-            @Override
-            public void onFailure(@Nullable String description) {
-                connectionDialog.show();
-            }
-        });
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.btn) {
+            init();
+        }
     }
 
     private void init() {
         if (connectionDialog.isShowing()) { connectionDialog.dismiss(); }
-        globalVM.splashScreenInit(new CompletionHandler<Boolean>() {
-            @Override
-            public void onSuccess(@NonNull Boolean model) {
-                if (connectionDialog.isShowing()) { connectionDialog.dismiss(); }
-                navController.navigate(R.id.action_splashScreen_to_main);
-            }
-
-            @Override
-            public void onFailure(@Nullable String description) {
-                connectionDialog.show();
+        globalVM.initSplash(status -> {
+            switch (status) {
+                case 1: { // Success
+                    navController.navigate(R.id.action_splashScreen_to_home);
+                    break;
+                }
+                case 2: { // Missing Hotel-Login
+                    navController.navigate(R.id.action_splashScreen_to_login);
+                    break;
+                }
+                case 3: { // Connection Error
+                    connectionDialog.show();
+                    break;
+                }
             }
         });
     }
 
-    private void setUpDialog() {
+    private void setUpDialog(@NonNull View view) {
+        connectionDialog = new Dialog(view.getContext(), R.style.PopUpDialogTheme);
         connectionDialog.setContentView(R.layout.dialog_internet_connection);
         connectionDialog.setCancelable(false);
         Button btn = connectionDialog.findViewById(R.id.btn);
-        btn.setOnClickListener(v -> {
-            if (loggedIn) {
-                init();
-            } else {
-                getAreas();
-            }
-        });
+        btn.setOnClickListener(this);
     }
 }

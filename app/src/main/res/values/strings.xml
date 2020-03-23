@@ -84,6 +84,7 @@
 
     <string name="included">Included:</string>
     <string name="next">Next</string>
+    <string name="choose_hotel">Choose Hotel</string>
     <string name="try_again">Try Again</string>
     <string name="slow_internet_connection">Slow or no internet connection.</string>
     <string name="check_settings">Please check your internet settings</string>
@@ -134,5 +135,8 @@
     <string name="move_back">Move back</string>
     <string name="move_forward">Move forward</string>
     <string name="press_button">Press Button</string>
+
+    <string name="user_name">Username</string>
+    <string name="password">Password</string>
 
 </resources>

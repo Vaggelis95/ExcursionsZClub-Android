@@ -5,7 +5,7 @@
         android:top="@dimen/calendar_date_shape_padding"
         android:bottom="@dimen/calendar_date_shape_padding">
         <shape android:shape="oval">
-            <solid android:color="@color/soft_red"/>
+            <solid android:color="@color/softRed"/>
         </shape>
     </item>
 </layer-list>

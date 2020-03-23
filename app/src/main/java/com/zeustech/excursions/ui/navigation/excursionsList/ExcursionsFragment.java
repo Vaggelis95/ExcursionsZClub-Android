@@ -141,7 +141,7 @@ public class ExcursionsFragment extends Fragment {
             adapter.setUserInteractionEnabled(false);
             globalVM.getExcursion(exc_code, new CompletionHandler<ExcursionModel>() {
                 @Override
-                public void onSuccess(@NonNull ExcursionModel model) {
+                public void onSuccess(@NonNull ExcursionModel model, int status) {
                     if (getParentFragment() != null) {
                         ExcursionDetails
                                 .newInstance(exc_name, model)
@@ -151,7 +151,7 @@ public class ExcursionsFragment extends Fragment {
                 }
 
                 @Override
-                public void onFailure(@Nullable String description) {
+                public void onFailure(@Nullable String description, int status) {
                     new Handler().postDelayed(() -> adapter.setUserInteractionEnabled(true), 1000);
                 }
             });

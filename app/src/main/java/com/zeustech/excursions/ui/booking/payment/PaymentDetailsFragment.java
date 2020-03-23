@@ -117,7 +117,7 @@ public class PaymentDetailsFragment extends Fragment {
             total_payment.setText(SpanConstructor.apply(
                     getResources().getString(R.string.total_payment),
                     String.format(getResources().getString(R.string.money_format), formattedPrice),
-                    ContextCompat.getColor(activity, R.color.soft_red)));
+                    ContextCompat.getColor(activity, R.color.softRed)));
             payment_button.setText(String.format(getResources().getString(R.string.pay), formattedPrice));
         } catch (IllegalFormatException e) {
             e.printStackTrace();
@@ -197,7 +197,7 @@ public class PaymentDetailsFragment extends Fragment {
                 fetchingStateUI(v, false);
                 globalVM.bookNow(getCardDetails(), sumPrice, new CompletionHandler<List<ExTicketId>>() {
                     @Override
-                    public void onSuccess(@NonNull List<ExTicketId> model) {
+                    public void onSuccess(@NonNull List<ExTicketId> model, int status) {
                         fetchingStateUI(v, true);
                         for (ExPriceModel price : sumPrice) {
                             globalVM.removeFromCart(price.getCode()); // 1# remove from basket
@@ -207,7 +207,7 @@ public class PaymentDetailsFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(@Nullable String description) {
+                    public void onFailure(@Nullable String description, int status) {
                         fetchingStateUI(v, true);
                         serverResponseUI(false, description);
                     }

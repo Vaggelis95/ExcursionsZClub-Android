@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_18"
         android:fontFamily="@font/brandon_reg"
-        android:textColor="@color/dark_gray"
+        android:textColor="@color/darkGray"
         android:text="@string/slow_internet_connection"/>
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/padding_25"
         android:textSize="@dimen/text_size_18"
-        android:textColor="@color/dark_gray"
+        android:textColor="@color/darkGray"
         android:fontFamily="@font/brandon_reg"
         android:text="@string/check_settings"/>
 

@@ -17,14 +17,16 @@ import com.zeustech.excursions.DAO.AreaDAO;
 import com.zeustech.excursions.DAO.CartDAO;
 import com.zeustech.excursions.DAO.ExcursionsDAO;
 import com.zeustech.excursions.DAO.HotelDAO;
-import com.zeustech.excursions.DAO.LoginDAO;
+import com.zeustech.excursions.DAO.LoginDataDAO;
 import com.zeustech.excursions.DAO.TicketsDAO;
+import com.zeustech.excursions.callbacks.Completion;
 import com.zeustech.excursions.callbacks.CompletionHandler;
-import com.zeustech.excursions.callbacks.CompletionLogin;
 import com.zeustech.excursions.callbacks.CompletionTransaction;
 import com.zeustech.excursions.customViews.DateManager;
 import com.zeustech.excursions.database.CouchbaseDAO;
+import com.zeustech.excursions.database.DatabaseManager;
 import com.zeustech.excursions.http.Repository;
+import com.zeustech.excursions.http.requests.LoginRequest;
 import com.zeustech.excursions.models.Area;
 import com.zeustech.excursions.models.CartModel;
 import com.zeustech.excursions.models.ExBookingData;
@@ -39,6 +41,7 @@ import com.zeustech.excursions.models.ExTicketModel;
 import com.zeustech.excursions.models.ExcursionModel;
 import com.zeustech.excursions.models.ExcursionsModel;
 import com.zeustech.excursions.models.Hotel;
+import com.zeustech.excursions.models.LoginData;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,7 +57,7 @@ public class GlobalVM extends AndroidViewModel {
     private SavedStateHandle savedStateHandle;
     private final Repository repository;
 
-    private final LoginDAO loginDAO;
+    private final LoginDataDAO loginDataDAO;
     private final AreaDAO areaDAO;
     private final HotelDAO hotelDAO;
 
@@ -67,7 +70,7 @@ public class GlobalVM extends AndroidViewModel {
     private MutableLiveData<Area> selectedArea;
     private LiveData<List<Hotel>> hotels;
 
-    private MutableLiveData<ExLoginModel> loginData;
+    private LoginData loginData;
     private MutableLiveData<Hotel> selectedHotel;
 
     private MutableLiveData<List<ExcursionsModel>> excursions;
@@ -103,7 +106,7 @@ public class GlobalVM extends AndroidViewModel {
         selectedArea = new MutableLiveData<>();
         hotels = Transformations.switchMap(selectedArea, this::getHotelsByArea);
 
-        loginData = new MutableLiveData<>();
+        loginData = null;
         selectedHotel = new MutableLiveData<>();
 
         excursions = new MutableLiveData<>();
@@ -158,7 +161,7 @@ public class GlobalVM extends AndroidViewModel {
         super(application);
         this.savedStateHandle = savedStateHandle;
         repository = Repository.getInstance(application);
-        loginDAO = new LoginDAO(application);
+        loginDataDAO = new LoginDataDAO(application);
         areaDAO = new AreaDAO(application);
         hotelDAO = new HotelDAO(application);
         excursionsDAO = new ExcursionsDAO(application);
@@ -174,9 +177,9 @@ public class GlobalVM extends AndroidViewModel {
     private void setUpTriggers(boolean enable) {
         if (enable) {
             areaDAO.addChangeListener(change -> areas.postValue(change));
-            loginDAO.addChangeListener(change -> {
+            loginDataDAO.addChangeListener(change -> {
                 Log.i(TAG, "Login Live Query Triggered: " + change);
-                loginData.postValue(change.size() > 0 ? change.get(0) : null);
+                loginData = change.size() > 0 ? change.get(0) : null;
             });
             // Selected Hotel Query
             hotelDAO.addChangeListener(change -> {
@@ -197,7 +200,7 @@ public class GlobalVM extends AndroidViewModel {
             });
         } else {
             areaDAO.removeChangeListener();
-            loginDAO.removeChangeListener();
+            loginDataDAO.removeChangeListener();
             hotelDAO.removeChangeListener();
             excursionsDAO.removeChangeListener();
             cartDAO.removeChangeListener();
@@ -276,19 +279,18 @@ public class GlobalVM extends AndroidViewModel {
 
     public void updatePrice(String date, String language, String adults, String children, String infants, CompletionTransaction completion) {
         ExBookingData exData = this.exData.getValue();
-        ExLoginModel data = loginData.getValue();
         Hotel hotel = selectedHotel.getValue();
-        if (exData != null && data != null && hotel != null) {
-            repository.getPrice(hotel.getHotelCode(), data, date, exData.getCode(), getLanCode(language), adults, children, infants,
+        if (exData != null && loginData != null && hotel != null) {
+            repository.getPrice(hotel.getHotelCode(), loginData, date, exData.getCode(), getLanCode(language), adults, children, infants,
                     new CompletionHandler<ExPriceModel>() {
                         @Override
-                        public void onSuccess(@NonNull ExPriceModel model) {
+                        public void onSuccess(@NonNull ExPriceModel model, int status) {
                             setCurrentPrice(model);
                             completion.onResult(true, null);
                         }
 
                         @Override
-                        public void onFailure(@Nullable String description) {
+                        public void onFailure(@Nullable String description, int status) {
                             completion.onResult(false, description);
                         }
                     });
@@ -297,16 +299,15 @@ public class GlobalVM extends AndroidViewModel {
 
     public void fetchAvailableLanguages() {
         ExBookingData exData = this.exData.getValue();
-        ExLoginModel data = loginData.getValue();
-        if (exData == null || data == null) return;
-        repository.getLanguages(data, exData.getCode(), new CompletionHandler<List<ExLanguageModel>>() {
+        if (exData == null || loginData == null) return;
+        repository.getLanguages(loginData, exData.getCode(), new CompletionHandler<List<ExLanguageModel>>() {
             @Override
-            public void onSuccess(@NonNull List<ExLanguageModel> model) {
+            public void onSuccess(@NonNull List<ExLanguageModel> model, int status) {
                 languages.setValue(model);
             }
 
             @Override
-            public void onFailure(@Nullable String description) { }
+            public void onFailure(@Nullable String description, int status) { }
         });
     }
 
@@ -350,16 +351,15 @@ public class GlobalVM extends AndroidViewModel {
 
     private void getAvailableDatesOf(@NonNull String firstDate, @NonNull String lastDate, @NonNull String language) {
         ExBookingData exData = this.exData.getValue();
-        ExLoginModel data = loginData.getValue();
-        if (exData == null || data == null) return;
-        repository.getProgram(exData.getCode(), firstDate, lastDate, language, data, new CompletionHandler<ExDaysModel>() {
+        if (exData == null || loginData == null) return;
+        repository.getProgram(exData.getCode(), firstDate, lastDate, language, loginData, new CompletionHandler<ExDaysModel>() {
             @Override
-            public void onSuccess(@NonNull ExDaysModel model) {
+            public void onSuccess(@NonNull ExDaysModel model, int status) {
                 setDates(model.getDays() != null ? model.getDays() : new ArrayList<>());
             }
 
             @Override
-            public void onFailure(@Nullable String description) {
+            public void onFailure(@Nullable String description, int status) {
                 setDates(new ArrayList<>());
             }
         });
@@ -367,11 +367,10 @@ public class GlobalVM extends AndroidViewModel {
 
     public void bookNow(@NonNull ExCardDetails cardDetails, List<ExPriceModel> basket, CompletionHandler<List<ExTicketId>> completion) {
         ExCustomerInfo customerInfo = getCustomerInfo().getValue();
-        ExLoginModel data = loginData.getValue();
-        if (customerInfo != null && data != null) {
-            repository.setBooking(data, basket, customerInfo, cardDetails, completion);
+        if (customerInfo != null && loginData != null) {
+            repository.setBooking(loginData, basket, customerInfo, cardDetails, completion);
         } else {
-            completion.onFailure(null);
+            completion.onFailure(null, -1);
         }
     }
 
@@ -389,106 +388,57 @@ public class GlobalVM extends AndroidViewModel {
         dates.setValue(new ArrayList<>());
     }
 
-    /*Excursions*/
-    public void refreshExcursions() {
-        ExLoginModel data = loginData.getValue();
-        Hotel hotel = selectedHotel.getValue();
-        if (data != null && hotel != null) {
-            repository.getExcursions(hotel.getHotelCode(), data.getCustomer(), DEFAULT_LAN, new CompletionHandler<List<ExcursionsModel>>() {
-                @Override
-                public void onSuccess(@NonNull List<ExcursionsModel> model) {
-                    try {
-                        excursionsDAO.deleteAllDocs();
-                        excursionsDAO.batchOperation(CouchbaseDAO.Operation.SAVE, model);
-                    } catch (CouchbaseLiteException e){
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onFailure(@Nullable String description) { }
-            });
-        }
-    }
-
-    public void getExcursion(String code, CompletionHandler<ExcursionModel> completion) {
-        repository.getExcursion(code, DEFAULT_LAN, completion);
-    }
-
-    public void triggerSearch() {
-        Boolean enabled = searchTrigger.getValue();
-        searchTrigger.setValue(enabled == null || !enabled);
-    }
-
-    /*Splash Screen*/
-    public void getAreas(final CompletionHandler<Boolean> completion) {
-        repository.getAreas(new CompletionHandler<List<Area>>() {
+    /*Home-SplashScreen Fragments*/
+    public void login(@NonNull String username, @NonNull String password,
+                      @NonNull CompletionHandler<Boolean> completion) {
+        repository.login(new LoginRequest(username, password), new CompletionHandler<ExLoginModel>() {
             @Override
-            public void onSuccess(@NonNull List<Area> model) {
+            public void onSuccess(@NonNull ExLoginModel model, int status) {
                 try {
-                    areaDAO.deleteAllDocs();
-                    areaDAO.batchOperation(CouchbaseDAO.Operation.SAVE, model);
+                    loginDataDAO.replaceAll(new LoginData(model, username, password));
                 } catch (CouchbaseLiteException e) {
                     e.printStackTrace();
                 }
-                completion.onSuccess(true);
+                completion.onSuccess(true, status);
             }
 
             @Override
-            public void onFailure(@Nullable String description) {
-                completion.onFailure(description);
+            public void onFailure(@Nullable String description, int status) {
+                completion.onFailure(description, status);
             }
         });
     }
 
-    public void splashScreenInit(@NonNull CompletionHandler<Boolean> completion) {
-        Hotel selectedHotel = getSelectedHotel();
-        if (selectedHotel != null) {
-            repository.init(selectedHotel.getHotelCode(), DEFAULT_LAN, new CompletionLogin() {
-                @Override
-                public void onSuccess(@NonNull ExLoginModel login, @NonNull List<ExcursionsModel> excursions) {
-                    try {
-                        loginDAO.deleteAllDocs();
-                        excursionsDAO.deleteAllDocs();
-                        loginDAO.saveDocument(login);
-                        excursionsDAO.batchOperation(CouchbaseDAO.Operation.SAVE, excursions);
-                    } catch (CouchbaseLiteException e) {
-                        e.printStackTrace();
-                    }
-                    completion.onSuccess(true);
+    public void getAreas(@Nullable CompletionTransaction completion) {
+        repository.getAreas(new CompletionHandler<List<Area>>() {
+            @Override
+            public void onSuccess(@NonNull List<Area> model, int status) {
+                try {
+                    areaDAO.replaceAll(model);
+                } catch (CouchbaseLiteException e) {
+                    e.printStackTrace();
                 }
+                if (completion != null) completion.onResult(true, null);
+            }
 
-                @Override
-                public void onFailure(@Nullable String description) {
-                    completion.onFailure(description);
-                }
-            });
-        }
+            @Override
+            public void onFailure(@Nullable String description, int status) {
+                if (completion != null) completion.onResult(false, description);
+            }
+        });
     }
 
-    @Nullable
-    public Hotel getSelectedHotel() {
-        try {
-            List<Hotel> hotels = hotelDAO.getAllDocuments();
-            if (hotels.size() == 1) return hotels.get(0);
-        } catch (CouchbaseLiteException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /*Login*/
     private LiveData<List<Hotel>> getHotelsByArea(@Nullable Area area) {
         MutableLiveData<List<Hotel>> hotels = new MutableLiveData<>();
         if (area != null) {
             repository.getHotels(area.getAreaCode(), new CompletionHandler<List<Hotel>>() {
                 @Override
-                public void onSuccess(@NonNull List<Hotel> model) {
+                public void onSuccess(@NonNull List<Hotel> model, int status) {
                     hotels.setValue(model);
                 }
 
                 @Override
-                public void onFailure(@Nullable String description) {
+                public void onFailure(@Nullable String description, int status) {
                     hotels.setValue(new ArrayList<>());
                 }
             });
@@ -496,6 +446,99 @@ public class GlobalVM extends AndroidViewModel {
             hotels.setValue(new ArrayList<>());
         }
         return hotels;
+    }
+
+    private void getExcursions(@NonNull String hotelCode, @Nullable CompletionTransaction completion) {
+        if (loginData != null) {
+            repository.getExcursions(hotelCode, loginData.getCustomer(), DEFAULT_LAN,
+                    new CompletionHandler<List<ExcursionsModel>>() {
+                        @Override
+                        public void onSuccess(@NonNull List<ExcursionsModel> model, int status) {
+                            try {
+                                excursionsDAO.replaceAll(model);
+                            } catch (CouchbaseLiteException e) {
+                                e.printStackTrace();
+                            }
+                            if (completion != null) completion.onResult(true, null);
+                        }
+
+                        @Override
+                        public void onFailure(@Nullable String description, int status) {
+                            if (status == 202) { // Work Around
+                                try {
+                                    excursionsDAO.replaceAll(new ArrayList<>());
+                                } catch (CouchbaseLiteException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if (completion != null) completion.onResult(status == 202, description);
+                        }
+                    });
+        } else if (completion != null) {
+            completion.onResult(false, null);
+        }
+    }
+
+    public void refreshExcursions() {
+        Hotel hotel = selectedHotel.getValue();
+        if (hotel != null) getExcursions(hotel.getHotelCode(), null);
+    }
+
+    public void getExcursion(String code, CompletionHandler<ExcursionModel> completion) {
+        repository.getExcursion(code, DEFAULT_LAN, completion);
+    }
+
+    /**Used by Login (1. Save Hotel, 2. Fetch Excursions)*/
+    public void initLogin(@NonNull String hotelName, @NonNull CompletionTransaction completion) {
+        Hotel hotel = getHotelWith(hotelName);
+        if (hotel != null) {
+            getExcursions(hotel.getHotelCode(), (success, message) -> {
+                if (success) {
+                    try {
+                        hotelDAO.replaceAll(hotel);
+                    } catch (CouchbaseLiteException e) {
+                        e.printStackTrace();
+                    }
+                }
+                completion.onResult(success, message);
+            });
+        } else {
+            completion.onResult(false, null);
+        }
+    }
+
+    /* 1: Success
+     * 2: Missing or Invalid Hotel-Login
+     * 3: Connection Error
+     * */
+    /**Used by SplashScreen (1. Check Hotel & Login Database data, 2. Login)*/
+    public void initSplash(@NonNull Completion<Integer> completion) {
+        Hotel hotel = hotelDAO.getSelectedHotel();
+        LoginData data = loginDataDAO.getLoginData();
+        if (hotel != null && data != null) {
+            login(data.getUsername(), data.getPassword(), new CompletionHandler<Boolean>() {
+                @Override
+                public void onSuccess(@NonNull Boolean model, int status) {
+                    completion.onResult(1);
+                }
+
+                @Override
+                public void onFailure(@Nullable String description, int status) {
+                    boolean connectionError = (status == -1);
+                    completion.onResult(connectionError ? 3 : 2);
+                }
+            });
+        } else {
+            completion.onResult(2);
+        }
+    }
+
+    public void eraseDatabase() {
+        try {
+            DatabaseManager.getInstance(getApplication()).eraseDatabase();
+        } catch (CouchbaseLiteException e) {
+            e.printStackTrace();
+        }
     }
 
     @Nullable
@@ -510,34 +553,9 @@ public class GlobalVM extends AndroidViewModel {
         return null;
     }
 
-    public void loginInit(@NonNull String hotelName, final @NonNull CompletionHandler<Boolean> completion) {
-        Hotel hotel = getHotelWith(hotelName);
-        if (hotel != null) {
-            repository.init(hotel.getHotelCode(), DEFAULT_LAN, new CompletionLogin() {
-                @Override
-                public void onSuccess(@NonNull ExLoginModel login, @NonNull List<ExcursionsModel> excursions) {
-                    try {
-                        hotelDAO.deleteAllDocs();
-                        loginDAO.deleteAllDocs();
-                        excursionsDAO.deleteAllDocs();
-
-                        hotelDAO.saveDocument(hotel);
-                        loginDAO.saveDocument(login);
-                        excursionsDAO.batchOperation(CouchbaseDAO.Operation.SAVE, excursions);
-                    } catch (CouchbaseLiteException e) {
-                        e.printStackTrace();
-                    }
-                    completion.onSuccess(true);
-                }
-
-                @Override
-                public void onFailure(@Nullable String description) {
-                    completion.onFailure(description);
-                }
-            });
-        } else {
-            completion.onFailure(null);
-        }
+    public void triggerSearch() {
+        Boolean enabled = searchTrigger.getValue();
+        searchTrigger.setValue(enabled == null || !enabled);
     }
 
     /*Tickets*/
@@ -554,12 +572,12 @@ public class GlobalVM extends AndroidViewModel {
         if (ids != null) {
             repository.getBookings(ids, new CompletionHandler<List<ExTicketModel>>() {
                 @Override
-                public void onSuccess(@NonNull List<ExTicketModel> model) {
+                public void onSuccess(@NonNull List<ExTicketModel> model, int status) {
                     tickets.setValue(model);
                 }
 
                 @Override
-                public void onFailure(@Nullable String description) {
+                public void onFailure(@Nullable String description, int status) {
                     tickets.setValue(new ArrayList<>());
                 }
             });
@@ -574,12 +592,12 @@ public class GlobalVM extends AndroidViewModel {
         if (ids == null) return;
         repository.getBookings(ids, new CompletionHandler<List<ExTicketModel>>() {
             @Override
-            public void onSuccess(@NonNull List<ExTicketModel> model) {
+            public void onSuccess(@NonNull List<ExTicketModel> model, int status) {
                 tickets.setValue(model);
             }
 
             @Override
-            public void onFailure(@Nullable String description) {
+            public void onFailure(@Nullable String description, int status) {
                 tickets.setValue(new ArrayList<>());
             }
         });

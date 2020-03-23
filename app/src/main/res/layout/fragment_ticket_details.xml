@@ -380,7 +380,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:fontFamily="@font/brandon_reg"
-                android:textColor="@color/dark_gray"
+                android:textColor="@color/darkGray"
                 android:textSize="@dimen/text_size_14_5"/>
 
             <ImageView

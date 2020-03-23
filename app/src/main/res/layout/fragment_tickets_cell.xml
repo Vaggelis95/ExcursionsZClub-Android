@@ -80,7 +80,7 @@
                 android:fontFamily="@font/brandon_reg"
                 android:textSize="@dimen/text_size_18"
                 android:text="@string/canceled"
-                android:textColor="@color/soft_red"
+                android:textColor="@color/softRed"
                 android:visibility="invisible"/>
 
         </LinearLayout>
@@ -92,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/tickets_cell_margin_top"
         android:fontFamily="@font/brandon_light"
-        android:textColor="@color/dark_gray"
+        android:textColor="@color/darkGray"
         android:textSize="@dimen/text_size_15"
         android:text="@string/click_for_details"/>
 

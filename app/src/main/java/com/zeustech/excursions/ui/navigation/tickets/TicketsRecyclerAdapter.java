@@ -70,7 +70,7 @@ public class TicketsRecyclerAdapter extends RecyclerView.Adapter<TicketsRecycler
             viewHolder.excDate.setText(formattedDate);
         }
         if (model.getStatus() == 2) {
-            viewHolder.excDate.setTextColor(res.getColor(R.color.soft_red));
+            viewHolder.excDate.setTextColor(res.getColor(R.color.softRed));
             viewHolder.status.setVisibility(View.VISIBLE);
         } else {
             viewHolder.excDate.setTextColor(res.getColor(R.color.blue));

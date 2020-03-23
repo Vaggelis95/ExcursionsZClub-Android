@@ -227,10 +227,15 @@ public abstract class CouchbaseDAO<T> {
     }
 
     public void replaceAll(@NonNull T model) throws CouchbaseLiteException {
+        deleteAllDocs();
+        saveDocument(model);
+    }
+
+    public void replaceAll(@NonNull List<T> list) throws CouchbaseLiteException {
+        deleteAllDocs();
         dbManager.getDatabase().inBatch(() -> {
             try {
-                deleteAllDocs();
-                updateDocument(model);
+                saveDocuments(list);
             } catch (CouchbaseLiteException e) {
                 e.printStackTrace();
             }

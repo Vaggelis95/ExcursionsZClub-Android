@@ -57,43 +57,43 @@ class BasketRecyclerAdapter extends ListAdapter<CartModel, BasketRecyclerAdapter
         viewHolder.date.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.date),
                 model.getPriceModel().getDate(),
-                ContextCompat.getColor(context, R.color.soft_red)));
+                ContextCompat.getColor(context, R.color.softRed)));
 
         viewHolder.pickup_point.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.pickup_point),
                 model.getPriceModel().getPickUpPoint(),
-                ContextCompat.getColor(context, R.color.soft_red)));
+                ContextCompat.getColor(context, R.color.softRed)));
 
         viewHolder.pickup_time.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.pickup_time),
                 model.getPriceModel().getPickUpTime(),
-                ContextCompat.getColor(context, R.color.soft_red)));
+                ContextCompat.getColor(context, R.color.softRed)));
 
         viewHolder.adults.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.adults),
                 String.valueOf(model.getPriceModel().getAdults()),
-                ContextCompat.getColor(context, R.color.soft_red)));
+                ContextCompat.getColor(context, R.color.softRed)));
 
         viewHolder.children.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.children),
                 String.valueOf(model.getPriceModel().getChildren()),
-                ContextCompat.getColor(context, R.color.soft_red)));
+                ContextCompat.getColor(context, R.color.softRed)));
 
         viewHolder.infants.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.infants),
                 String.valueOf(model.getPriceModel().getInfants()),
-                ContextCompat.getColor(context, R.color.soft_red)));
+                ContextCompat.getColor(context, R.color.softRed)));
 
         viewHolder.language.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.language),
                 model.getPriceModel().getLanguage(),
-                ContextCompat.getColor(context, R.color.soft_red)));
+                ContextCompat.getColor(context, R.color.softRed)));
 
         viewHolder.price.setText(SpanConstructor.apply(
                 context.getResources().getString(R.string.excursion_price),
                 String.format(context.getResources().getString(R.string.money_format),
                         model.getPriceModel().getFormattedPrice()),
-                ContextCompat.getColor(context, R.color.soft_red)));
+                ContextCompat.getColor(context, R.color.softRed)));
 
         Glide.with(context).load(model.getPickPath()).into(viewHolder.image);
     }
@@ -109,11 +109,11 @@ class BasketRecyclerAdapter extends ListAdapter<CartModel, BasketRecyclerAdapter
     class BasketViewHolder extends RecyclerView.ViewHolder {
 
         private TextView headline, date, pickup_point, pickup_time, adults, children, infants, language, price;
-        private ImageView delete_button, image;
+        private ImageView image;
 
         BasketViewHolder(@NonNull View itemView) {
             super(itemView);
-            delete_button = itemView.findViewById(R.id.delete_button);
+            ImageView delete_button = itemView.findViewById(R.id.delete_button);
             image = itemView.findViewById(R.id.image);
             headline = itemView.findViewById(R.id.headline);
             date = itemView.findViewById(R.id.date);

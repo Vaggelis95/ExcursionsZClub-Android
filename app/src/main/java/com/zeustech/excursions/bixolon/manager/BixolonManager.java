@@ -53,9 +53,9 @@ public class BixolonManager {
             final String message = success ? SUCCESS_MSG : FAILURE_MSG;
             new Handler(Looper.getMainLooper()).post(() -> {
                 if (success) {
-                    completionHandler.onSuccess(message);
+                    completionHandler.onSuccess(message, -1);
                 } else {
-                    completionHandler.onFailure(message);
+                    completionHandler.onFailure(message, -1);
                 }
             });
         }).start();
@@ -66,7 +66,7 @@ public class BixolonManager {
         if (address != null) {
             open(DEFAULT_PRINTER_NAME, address, completion);
         } else {
-            completion.onFailure(FAILURE_MSG);
+            completion.onFailure(FAILURE_MSG, -1);
         }
     }
 
@@ -107,17 +107,17 @@ public class BixolonManager {
     public void connectPrintDisconnect(@NonNull final ExTicketModel receipt, @NonNull final CompletionHandler<String> completion) {
         connectToDefaultPrinter(new CompletionHandler<String>() { // connect
             @Override
-            public void onSuccess(@NonNull String model) {
+            public void onSuccess(@NonNull String model, int status) {
                 printTicket(receipt); // If connected print
                 new Handler().postDelayed(() -> {
                     close(); // disconnect after 4 seconds
-                    completion.onSuccess("Success!");
+                    completion.onSuccess("Success!", status);
                 }, 3000);
             }
 
             @Override
-            public void onFailure(@Nullable String description) {
-                completion.onFailure(description);
+            public void onFailure(@Nullable String description, int status) {
+                completion.onFailure(description, status);
             }
         });
     }

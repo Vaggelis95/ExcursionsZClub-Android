@@ -53,7 +53,7 @@ public class EventButton extends androidx.appcompat.widget.AppCompatButton {
                 break;
             }
             case RED: {
-                int color = ContextCompat.getColor(context, R.color.soft_red);
+                int color = ContextCompat.getColor(context, R.color.softRed);
                 drawable.setColor(color);
                 drawable.setStroke(2, color);
                 setTextColor(Color.WHITE);

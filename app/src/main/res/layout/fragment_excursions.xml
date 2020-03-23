@@ -60,7 +60,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/search_field"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:src="@drawable/ic_clear"
-                android:tint="@color/dark_gray"
+                android:tint="@color/darkGray"
                 android:contentDescription="@string/clear" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -85,7 +85,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/no_excursions_found"
             android:textSize="17sp"
-            android:textColor="@color/dark_gray"
+            android:textColor="@color/darkGray"
             android:fontFamily="@font/brandon_reg"
             android:visibility="gone"/>
 

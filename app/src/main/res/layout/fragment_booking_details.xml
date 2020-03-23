@@ -82,7 +82,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
 
-                app:mcv_selectionColor="@color/soft_red"
+                app:mcv_selectionColor="@color/softRed"
                 app:mcv_firstDayOfWeek="monday"
                 app:mcv_headerTextAppearance="@style/CalendarHeaderTextStyle"
                 app:mcv_weekDayTextAppearance="@style/CalendarWeekDayTextStyle"

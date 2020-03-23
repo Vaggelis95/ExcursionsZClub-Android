@@ -14,22 +14,22 @@
             android:id="@+id/action_splashScreen_to_login"
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_splashScreen_to_main"
+            android:id="@+id/action_splashScreen_to_home"
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true"
             app:destination="@id/mainFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.zeustech.excursions.ui.login.LoginFragment"
+        android:id="@+id/homeFragment"
+        android:name="com.zeustech.excursions.ui.home.HomeFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_login_to_main"
-            app:popUpTo="@id/loginFragment"
+            android:id="@+id/action_home_to_main"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"
             app:destination="@id/mainFragment" />
     </fragment>

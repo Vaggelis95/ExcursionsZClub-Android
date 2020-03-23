@@ -6,10 +6,10 @@ public class ExcursionsRequest {
 
     private final String hotel, language, customer;
 
-    public ExcursionsRequest(String hotel, String language, String customer) {
+    public ExcursionsRequest(String hotel, String customer, String language) {
         this.hotel = hotel;
-        this.language = language;
         this.customer = customer;
+        this.language = language;
     }
 
     @NonNull
@@ -17,8 +17,8 @@ public class ExcursionsRequest {
     public String toString() {
         return "ExcursionsRequest{" +
                 "hotel='" + hotel + '\'' +
-                ", language='" + language + '\'' +
                 ", customer='" + customer + '\'' +
+                ", language='" + language + '\'' +
                 '}';
     }
 }
